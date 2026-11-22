@@ -1077,7 +1077,7 @@
           <div class="canvas-frame-wrap" id="canvas-frame-wrap">
             <div class="browser-chrome">
               <div class="chrome-dots"><span></span><span></span><span></span></div>
-              <div class="chrome-url" id="chrome-title-preview">M&M PROTEK</div>
+              <div class="chrome-url" id="chrome-title-preview">M&amp;M PROTEK</div>
             </div>
             <iframe id="editor-iframe" title="Editor Visual"></iframe>
           </div>
@@ -1858,6 +1858,126 @@ ${UA_BUTTON_EFFECTS_CSS}
 .mm-btn{width:100%}
 }`;
 
+      const LMS_TEMPLATE_CSS = `/* LMS_SERRALHERIA_V1 */
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+.lms-page-bg{position:fixed;inset:0;z-index:0;background-color:#141619;background-size:cover;background-position:center center;background-repeat:no-repeat;transform:scale(1.02);transition:background-image .4s ease;pointer-events:none}
+.lms-page-bg-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.36) 0%,rgba(14,14,14,.64) 45%,rgba(10,10,10,.82) 100%);pointer-events:none}
+.lms-hero,.lms-section,.lms-sobre,.lms-galeria,.lms-contato,.lms-footer{position:relative;z-index:1}
+
+/* Cabeçalho Hero */
+.lms-hero{background:linear-gradient(180deg,rgba(0,0,0,.25) 0%,rgba(12,12,12,.65) 100%);color:#ffffff;padding:clamp(3.6rem,8vw,6rem) 2rem clamp(3.2rem,7vw,5rem);text-align:center;overflow:hidden}
+.lms-hero::after{content:"";position:absolute;bottom:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,transparent,var(--accent,#f5a623),transparent)}
+.lms-hero-content{max-width:850px;margin:0 auto;animation:lmsHeroFadeUp .9s ease-out forwards}
+.lms-hero-badge{display:inline-block;background:rgba(245,166,35,.22);border:1px solid rgba(245,166,35,.7);color:#ffd98e;padding:.35rem 1rem;border-radius:50px;font-size:.85rem;font-weight:600;letter-spacing:.5px;margin-bottom:1rem;text-transform:uppercase;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.lms-hero h1{font-size:clamp(2rem,5vw,3.3rem);line-height:1.15;font-weight:800;margin-bottom:.8rem;letter-spacing:2px;color:#ffffff;text-shadow:0 4px 18px rgba(0,0,0,.85)}
+.lms-hero p{font-size:clamp(1rem,1.8vw,1.18rem);color:#f0f0f0;max-width:720px;margin:0 auto 2rem;text-shadow:0 2px 10px rgba(0,0,0,.85)}
+.lms-hero-actions{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+.lms-btn{display:inline-flex;align-items:center;justify-content:center;padding:.85rem 1.8rem;border-radius:var(--btn-radius,8px);font-weight:600;text-decoration:none;transition:transform .25s ease,box-shadow .25s ease,background .25s ease;cursor:pointer;border:none;font-size:1rem}
+.lms-btn-primary{background:var(--accent,#f5a623);color:var(--accent-ink,#111111);box-shadow:0 4px 18px rgba(245,166,35,.4)}
+.lms-btn-primary:hover{filter:brightness(1.08);transform:translateY(-3px);box-shadow:0 8px 24px rgba(245,166,35,.55)}
+.lms-btn-outline{background:rgba(0,0,0,.45);color:#ffffff;border:1px solid rgba(255,255,255,.45);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.lms-btn-outline:hover{background:rgba(255,255,255,.18);transform:translateY(-3px)}
+
+/* Navegação Sticky */
+.lms-nav{background:rgba(16,16,16,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:.9rem 1.5rem;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(245,166,35,.22);box-shadow:0 4px 16px rgba(0,0,0,.35)}
+.lms-nav-container{max-width:var(--maxw,1200px);margin:0 auto;display:flex;justify-content:center;align-items:center;position:relative}
+.lms-menu-toggle{display:none;background:none;border:1px solid rgba(255,255,255,.25);color:#ffffff;font-size:1.4rem;padding:.25rem .7rem;border-radius:6px;cursor:pointer}
+.lms-nav ul{list-style:none;display:flex;justify-content:center;flex-wrap:wrap;gap:2rem;margin:0;padding:0}
+.lms-nav a{color:#f0f0f0;text-decoration:none;font-weight:500;position:relative;padding:.3rem 0;transition:color .3s}
+.lms-nav a::after{content:"";position:absolute;bottom:0;left:0;width:100%;height:2px;background:var(--accent,#f5a623);transform:scaleX(0);transform-origin:center;transition:transform .3s ease}
+.lms-nav a:hover,.lms-nav a.active{color:var(--accent,#f5a623)}
+.lms-nav a:hover::after,.lms-nav a.active::after{transform:scaleX(1)}
+
+/* Seções Gerais */
+.lms-section{padding:3.5rem 2rem;max-width:var(--maxw,1200px);margin:0 auto}
+.lms-section h2,.lms-sobre h2,.lms-galeria h2,.lms-contato h2{font-size:clamp(1.5rem,2.6vw,1.9rem);line-height:1.25;font-weight:700;color:#222222;margin-bottom:1.5rem;border-bottom:3px solid var(--accent,#f5a623);padding-bottom:.5rem;display:inline-block}
+.lms-section-light-text h2{color:#ffffff;text-shadow:0 2px 10px rgba(0,0,0,.7)}
+.lms-section-light-text > p{color:#eaeaea;text-shadow:0 1px 6px rgba(0,0,0,.8)}
+
+/* Scroll Reveal (visível no editor, animado no preview/export) */
+html.lms-anim-ready body.preview-mode .lms-reveal,
+html.lms-anim-ready:not(.lms-editor-ctx) .lms-reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+html.lms-anim-ready body.preview-mode .lms-reveal.visible,
+html.lms-anim-ready:not(.lms-editor-ctx) .lms-reveal.visible{opacity:1;transform:translateY(0)}
+
+/* Sobre Nós */
+.lms-sobre{background:var(--card,rgba(255,255,255,.94));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:var(--radius,12px);padding:2.5rem;box-shadow:0 8px 24px rgba(0,0,0,.22);border-left:5px solid var(--accent,#f5a623);color:#333333;margin-top:0}
+.lms-sobre p{color:#333333;font-size:1rem;line-height:1.65}
+
+/* Grid de Serviços */
+.lms-servicos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-top:2rem}
+.lms-servico-card{background:var(--card,rgba(255,255,255,.94));backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:var(--radius,12px);padding:1.8rem;box-shadow:0 8px 24px rgba(0,0,0,.22);position:relative;overflow:hidden;color:#333333;transition:transform .35s ease,box-shadow .35s ease,background .3s ease}
+.lms-servico-card::before{content:"";position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,var(--accent,#f5a623),#ffcc66);transform:scaleX(0);transform-origin:left;transition:transform .35s ease}
+.lms-servico-card:hover{transform:translateY(-8px);box-shadow:0 16px 36px rgba(0,0,0,.35);background:#ffffff}
+.lms-servico-card:hover::before{transform:scaleX(1)}
+.lms-servico-card h3{color:#222222;margin-bottom:.8rem;font-size:1.25rem;font-weight:700;display:flex;align-items:center;gap:.6rem}
+.lms-servico-card p{color:#333333;font-size:.98rem;line-height:1.6}
+.lms-servico-icon{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;background:rgba(245,166,35,.16);border-radius:10px;font-size:1.25rem;flex-shrink:0;transition:transform .3s ease,background .3s ease}
+.lms-servico-card:hover .lms-servico-icon{transform:scale(1.12) rotate(-5deg);background:var(--accent,#f5a623)}
+
+/* Galeria */
+.lms-galeria{background:var(--card,rgba(255,255,255,.94));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:var(--radius,12px);padding:2.5rem;box-shadow:0 8px 24px rgba(0,0,0,.22);margin-top:2rem;color:#333333}
+.lms-galeria > p{color:#333333}
+.lms-galeria-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-top:1.5rem}
+.lms-galeria-item{text-align:center;border-radius:10px;overflow:hidden;background:#ffffff;box-shadow:0 4px 12px rgba(0,0,0,.1);cursor:pointer;transition:transform .35s ease,box-shadow .35s ease}
+.lms-galeria-item:hover{transform:translateY(-6px);box-shadow:0 12px 28px rgba(0,0,0,.2)}
+.lms-galeria-img-box{position:relative;overflow:hidden;height:220px;background:#2b2b2b}
+.lms-galeria-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s cubic-bezier(.22,1,.36,1),filter .35s ease}
+.lms-galeria-item:hover img{transform:scale(1.09);filter:brightness(.8)}
+.lms-galeria-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);opacity:0;transition:opacity .3s ease;pointer-events:none}
+.lms-galeria-item:hover .lms-galeria-overlay{opacity:1}
+.lms-galeria-overlay span{background:var(--accent,#f5a623);color:#111111;padding:.45rem 1rem;border-radius:50px;font-weight:600;font-size:.9rem;transform:translateY(10px);transition:transform .3s ease}
+.lms-galeria-item:hover .lms-galeria-overlay span{transform:translateY(0)}
+.lms-galeria-item p{padding:1rem;font-size:.95rem;background:#ffffff;color:#333333;border-top:2px solid #f2f2f2}
+
+/* Contato */
+.lms-contato{background:rgba(18,18,18,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(245,166,35,.35);color:#ffffff;border-radius:var(--radius,12px);padding:2.5rem;margin-top:2.5rem;box-shadow:0 8px 24px rgba(0,0,0,.22)}
+.lms-contato h2{color:var(--accent,#f5a623);border-bottom-color:rgba(255,255,255,.3)}
+.lms-contato p{margin:.7rem 0;font-size:1.05rem;color:#f3f4f6}
+.lms-contato a{color:var(--accent,#f5a623);text-decoration:none;font-weight:600}
+.lms-contato a:hover{text-decoration:underline}
+.lms-copy-btn{background:rgba(255,255,255,.12);color:#ffffff;border:1px solid rgba(255,255,255,.25);padding:.25rem .7rem;border-radius:6px;font-size:.82rem;margin-left:.6rem;cursor:pointer;transition:background .2s,color .2s}
+.lms-copy-btn:hover{background:var(--accent,#f5a623);color:#111111;border-color:var(--accent,#f5a623)}
+
+/* Rodapé */
+.lms-footer{background:rgba(10,10,10,.94);color:#999999;text-align:center;padding:2rem;margin-top:3rem;border-top:1px solid rgba(255,255,255,.08)}
+.lms-footer p{margin:.25rem 0;color:#999999}
+.lms-footer strong{color:#e5e7eb}
+
+/* Lightbox Modal + Toast + Voltar ao Topo */
+#lms-lightbox{position:fixed;inset:0;background:rgba(0,0,0,.9);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;z-index:1000;opacity:0;pointer-events:none;transition:opacity .3s ease;padding:1.5rem}
+#lms-lightbox.open{opacity:1;pointer-events:auto}
+.lms-lightbox-content{position:relative;max-width:850px;width:100%;background:#1c1c1c;border-radius:12px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.65);transform:scale(.92);transition:transform .3s ease}
+#lms-lightbox.open .lms-lightbox-content{transform:scale(1)}
+.lms-lightbox-content img{width:100%;max-height:72vh;object-fit:cover;display:block}
+.lms-lightbox-caption{padding:1.2rem 1.5rem;color:#ffffff;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.lms-lightbox-close{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:none;background:rgba(0,0,0,.75);color:#ffffff;font-size:1.4rem;cursor:pointer;transition:background .2s,transform .2s}
+.lms-lightbox-close:hover{background:var(--accent,#f5a623);color:#111111;transform:rotate(90deg)}
+#lms-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#222222;color:#ffffff;border-left:4px solid var(--accent,#f5a623);padding:.8rem 1.4rem;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.4);z-index:1200;opacity:0;pointer-events:none;transition:transform .35s ease,opacity .35s ease}
+#lms-toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.lms-back-to-top{position:fixed;bottom:24px;right:24px;width:46px;height:46px;border-radius:50%;background:var(--accent,#f5a623);color:#111111;border:none;font-size:1.3rem;font-weight:bold;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.35);opacity:0;pointer-events:none;transform:translateY(15px);transition:opacity .3s ease,transform .3s ease,background .2s ease;z-index:90}
+.lms-back-to-top.show{opacity:1;pointer-events:auto;transform:translateY(0)}
+.lms-back-to-top:hover{filter:brightness(1.08);transform:translateY(-3px)}
+
+@keyframes lmsHeroFadeUp{
+from{opacity:0;transform:translateY(25px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+@media (max-width:768px){
+.lms-hero{padding:4rem 1.2rem}
+.lms-nav-container{justify-content:space-between;flex-wrap:wrap}
+.lms-menu-toggle{display:block}
+.lms-nav ul{display:none;flex-direction:column;width:100%;gap:.8rem;padding-top:1rem;text-align:center}
+.lms-nav ul.open{display:flex}
+.lms-section{padding:2.2rem 1rem}
+.lms-sobre,.lms-galeria,.lms-contato{padding:1.5rem}
+.lms-servicos-grid,.lms-galeria-grid{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+.lms-reveal,.lms-hero-content,.lms-servico-card,.lms-galeria-item{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}`;
+
       const EDITOR_OVERLAY_CSS = `
         body:not(.preview-mode) * {
           user-select: text !important;
@@ -1871,8 +1991,18 @@ ${UA_BUTTON_EFFECTS_CSS}
         body:not(.preview-mode) #preloader {
           display: none !important;
         }
-        [data-block-id] {
+        body:not(.preview-mode) .lms-reveal {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+        [data-block-id]:not(.lms-page-bg) {
           position: relative;
+          transition: outline-color 0.12s;
+        }
+        [data-block-id].lms-page-bg {
+          position: fixed !important;
+          inset: 0 !important;
+          z-index: 0 !important;
           transition: outline-color 0.12s;
         }
         body:not(.preview-mode) [data-block-id]:hover {
@@ -2329,6 +2459,148 @@ ${UA_BUTTON_EFFECTS_CSS}
 </footer>`
       };
 
+      const LMS_BLOCKS = {
+        pageBg: () => `<div class="lms-page-bg" style="background-image:url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1600&q=85')">
+  <div class="lms-page-bg-overlay" aria-hidden="true"></div>
+</div>`,
+
+        header: () => `<header class="lms-hero">
+  <div class="lms-hero-content">
+    <span class="lms-hero-badge">Atendimento em toda a Grande São Paulo</span>
+    <h1>L.M.S. SERRALHERIA</h1>
+    <p>Soluções em Estruturas Metálicas — Excelência Técnica em Cada Projeto</p>
+    <div class="lms-hero-actions">
+      <a href="#contato" class="lms-btn lms-btn-primary">Solicitar Orçamento</a>
+      <a href="#servicos" class="lms-btn lms-btn-outline">Conhecer Serviços</a>
+    </div>
+  </div>
+</header>`,
+
+        nav: () => `<nav class="lms-nav">
+  <div class="lms-nav-container">
+    <button class="lms-menu-toggle" type="button" aria-expanded="false" aria-label="Abrir menu">&#9776;</button>
+    <ul id="lms-nav-menu">
+      <li><a href="#inicio" class="active">Início</a></li>
+      <li><a href="#sobre">Sobre Nós</a></li>
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#galeria">Galeria</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+  </div>
+</nav>`,
+
+        welcome: () => `<section id="inicio" class="lms-section lms-reveal lms-section-light-text">
+  <h2>Bem-vindo à LMS Serralheria</h2>
+  <p style="font-size:1.15rem;max-width:900px;">Serralheria completa com excelência técnica. Através da nossa parceria com a <strong>Jacobina Empreiteira</strong>, entregamos projetos integrados de serralheria, hidráulica, elétrica e reformas em toda a Grande São Paulo.</p>
+</section>`,
+
+        about: () => `<section id="sobre" class="lms-section lms-sobre lms-reveal">
+  <h2>Sobre Nós</h2>
+  <p>A <strong>L.M.S. Serralheria</strong> oferece soluções completas em serralheria, com qualidade e inovação em cada projeto.</p>
+  <br />
+  <p>Graças à parceria estratégica com a <strong>Jacobina Empreiteira</strong>, ampliamos nosso portfólio para incluir serviços de hidráulica, elétrica, gesso, revestimento cerâmico e instalação de lona provisória (em caso de destelhamento).</p>
+  <br />
+  <p><strong>Atendemos clientes residenciais e comerciais em São Paulo</strong>, sempre com foco em segurança, eficiência e excelência.</p>
+</section>`,
+
+        services: () => `<section id="servicos" class="lms-section lms-reveal lms-section-light-text">
+  <h2>Nossos Serviços</h2>
+  <p>Conheça tudo o que oferecemos para sua obra ou projeto:</p>
+  <div class="lms-servicos-grid">
+    <div class="lms-servico-card lms-reveal">
+      <h3><span class="lms-servico-icon">🔧</span> Serralheria</h3>
+      <p>Portões, grades, estruturas metálicas e serviços de soldagem com acabamento profissional.</p>
+    </div>
+    <div class="lms-servico-card lms-reveal">
+      <h3><span class="lms-servico-icon">💧</span> Hidráulica</h3>
+      <p>Instalações e reparos hidráulicos, encanamentos e manutenção preventiva para residências e empresas.</p>
+    </div>
+    <div class="lms-servico-card lms-reveal">
+      <h3><span class="lms-servico-icon">⚡</span> Elétrica</h3>
+      <p>Instalações elétricas completas, manutenção e reparos com foco em segurança e normas técnicas.</p>
+    </div>
+    <div class="lms-servico-card lms-reveal">
+      <h3><span class="lms-servico-icon">🏠</span> Lona Provisória</h3>
+      <p>Cobertura de telhado provisório em casos de emergência ou destelhamento por chuvas.</p>
+    </div>
+    <div class="lms-servico-card lms-reveal">
+      <h3><span class="lms-servico-icon">🧱</span> Cerâmica</h3>
+      <p>Revestimentos cerâmicos para pisos e paredes com acabamento refinado e durabilidade.</p>
+    </div>
+    <div class="lms-servico-card lms-reveal">
+      <h3><span class="lms-servico-icon">📐</span> Gesso e Drywall</h3>
+      <p>Forros, divisórias e acabamentos modernos em gesso acartonado para ambientes personalizados.</p>
+    </div>
+  </div>
+</section>`,
+
+        gallery: () => `<section id="galeria" class="lms-section lms-galeria lms-reveal">
+  <h2>Galeria de Trabalhos</h2>
+  <p>Conheça nossos serviços em imagens (clique para ampliar):</p>
+  <div class="lms-galeria-grid">
+    <div class="lms-galeria-item lms-reveal" data-title="01 — Serralheria" data-desc="Soldagem e estruturas metálicas">
+      <div class="lms-galeria-img-box">
+        <img src="https://images.unsplash.com/photo-1563229708-55d0a600b01d?auto=format&fit=crop&w=800&q=80" alt="Soldador trabalhando em estrutura metálica com faíscas" loading="lazy" />
+        <div class="lms-galeria-overlay"><span>🔍 Ampliar</span></div>
+      </div>
+      <p><strong>01 — Serralheria</strong><br />Soldagem e estruturas metálicas</p>
+    </div>
+    <div class="lms-galeria-item lms-reveal" data-title="02 — Hidráulica" data-desc="Instalações e reparos hidráulicos">
+      <div class="lms-galeria-img-box">
+        <img src="https://images.unsplash.com/photo-1676210134188-4c05dd172f89?auto=format&fit=crop&w=900&q=80" alt="Técnico hidráulico trabalhando em tubulações e registros na parede" loading="lazy" />
+        <div class="lms-galeria-overlay"><span>🔍 Ampliar</span></div>
+      </div>
+      <p><strong>02 — Hidráulica</strong><br />Instalações e reparos hidráulicos</p>
+    </div>
+    <div class="lms-galeria-item lms-reveal" data-title="03 — Elétrica" data-desc="Instalações e reparos elétricos">
+      <div class="lms-galeria-img-box">
+        <img src="https://images.unsplash.com/photo-1615774925655-a0e97fc85c14?auto=format&fit=crop&w=800&q=80" alt="Eletricista com equipamentos de segurança trabalhando em painel elétrico" loading="lazy" />
+        <div class="lms-galeria-overlay"><span>🔍 Ampliar</span></div>
+      </div>
+      <p><strong>03 — Elétrica</strong><br />Instalações e reparos elétricos</p>
+    </div>
+    <div class="lms-galeria-item lms-reveal" data-title="04 — Lona Provisória" data-desc="Cobertura para destelhamentos">
+      <div class="lms-galeria-img-box">
+        <img src="https://images.unsplash.com/photo-1760331840361-d751cfc1becf?auto=format&fit=crop&w=800&q=80" alt="Equipe realizando reparo e cobertura emergencial de telhado" loading="lazy" />
+        <div class="lms-galeria-overlay"><span>🔍 Ampliar</span></div>
+      </div>
+      <p><strong>04 — Lona Provisória</strong><br />Cobertura para destelhamentos</p>
+    </div>
+    <div class="lms-galeria-item lms-reveal" data-title="05 — Gesso e Drywall" data-desc="Divisórias e acabamentos">
+      <div class="lms-galeria-img-box">
+        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=900&q=80" alt="Estrutura metálica para divisórias em drywall e reforma interna" loading="lazy" />
+        <div class="lms-galeria-overlay"><span>🔍 Ampliar</span></div>
+      </div>
+      <p><strong>05 — Gesso e Drywall</strong><br />Divisórias e acabamentos</p>
+    </div>
+    <div class="lms-galeria-item lms-reveal" data-title="06 — Cerâmica" data-desc="Revestimentos cerâmicos">
+      <div class="lms-galeria-img-box">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/25/US_Navy_051224-N-4374S-002_Builder_3rd_Class_Jonathan_Martinez%2C_assigned_to_Naval_Mobile_Construction_Battalion_Three_%28NMCB-3%29%2C_applies_a_ceramic_floor_tile_during_the_restoration_project_at_the_Providence_Hall_in_St._Elisabet.jpg" alt="Profissional ajoelhado instalando piso cerâmico" loading="lazy" />
+        <div class="lms-galeria-overlay"><span>🔍 Ampliar</span></div>
+      </div>
+      <p><strong>06 — Cerâmica</strong><br />Revestimentos cerâmicos</p>
+    </div>
+  </div>
+</section>`,
+
+        contact: () => `<section id="contato" class="lms-section lms-contato lms-reveal">
+  <h2>Entre em Contato</h2>
+  <p><strong>📍 Endereço:</strong> Rua José Moreira dos Santos, 50 — Jd. Martini, São Paulo/SP</p>
+  <p>
+    <strong>📧 E-mail:</strong>
+    <a href="mailto:lmserralheriasolda@gmail.com?subject=Orçamento" id="lms-email-link">lmserralheriasolda@gmail.com</a>
+    <button type="button" class="lms-copy-btn">Copiar e-mail</button>
+  </p>
+  <br />
+  <p style="font-style:italic;color:#dddddd;">Solicite seu orçamento sem compromisso! Atendimento em toda a Grande São Paulo.</p>
+</section>`,
+
+        footer: () => `<footer class="lms-footer">
+  <p><strong>L.M.S. Serralheria</strong> — Soluções em Estruturas Metálicas e Reformas em São Paulo</p>
+  <p>&copy; 2026 LMS Serralheria. Todos os direitos reservados.</p>
+</footer>`
+      };
+
       function makeUaGraphic(kind) {
         const wrap = (w, h, body, outScale = 2) =>
           "data:image/svg+xml;charset=utf-8," +
@@ -2480,7 +2752,7 @@ ${UA_BUTTON_EFFECTS_CSS}
           "tech-claude": wrap(48, 48, `<path d="M24 5V43M5 24H43M10.5 10.5L37.5 37.5M37.5 10.5L10.5 37.5" stroke="#d97706" stroke-width="3.2" stroke-linecap="round"/>`, 4),
           "tech-codex": wrap(48, 48, `<rect x="6" y="8" width="36" height="32" rx="8" fill="#0f172a"/><path d="M18 19L13 24L18 29M30 19L35 24L30 29M26 17L22 31" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>`, 4),
           "tech-grok": wrap(48, 48, `<circle cx="24" cy="24" r="16" fill="none" stroke="#0f172a" stroke-width="3.2"/><path d="M12 34L36 14" stroke="#0f172a" stroke-width="3.2" stroke-linecap="round"/>`, 4),
-          "tech-starlink": wrap(96, 36, `<path d="M10 28 C28 10 68 8 86 24" fill="none" stroke="#0f172a" stroke-width="3" stroke-linecap="round"/><circle cx="68" cy="15" r="4" fill="#2563eb"/><text x="12" y="30" font-family="sans-serif" font-size="11" font-weight="800" fill="#0f172a" letter-spacing="1.5">SAT-LINK</text>`, 4),
+           "tech-starlink": wrap(96, 36, `<path d="M10 28 C28 10 68 8 86 24" fill="none" stroke="#0f172a" stroke-width="3" stroke-linecap="round"/><circle cx="68" cy="15" r="4" fill="#2563eb"/><text x="12" y="30" font-family="sans-serif" font-size="11" font-weight="800" fill="#0f172a" letter-spacing="1.5">SAT-LINK</text>`, 4),
           "tech-wordpress": wrap(48, 48, `<circle cx="24" cy="24" r="18" fill="none" stroke="#1e3a8a" stroke-width="3"/><path d="M13 17L19 34L24 20L29 34L35 17" fill="none" stroke="#1e3a8a" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>`, 4),
           "tech-elementor": wrap(48, 48, `<rect x="6" y="6" width="36" height="36" rx="9" fill="#be123c"/><rect x="14" y="14" width="5" height="20" rx="1.5" fill="#fff"/><rect x="23" y="14" width="11" height="4.5" rx="1.5" fill="#fff"/><rect x="23" y="21.75" width="11" height="4.5" rx="1.5" fill="#fff"/><rect x="23" y="29.5" width="11" height="4.5" rx="1.5" fill="#fff"/>`, 4)
         };
@@ -2897,6 +3169,62 @@ ${UA_BUTTON_EFFECTS_CSS}
           html: MM_BLOCKS.contactsAndFooter
         },
         {
+          type: "lms-page-bg",
+          name: "Construção 2: Fundo Parallax",
+          desc: "Imagem de fundo fixa em tela cheia",
+          requiresLmsCss: true,
+          icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/></svg>`,
+          html: LMS_BLOCKS.pageBg
+        },
+        {
+          type: "lms-hero",
+          name: "Construção 2: Hero Serralheria",
+          desc: "Banner metálico com badge e dois botões",
+          requiresLmsCss: true,
+          icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
+          html: LMS_BLOCKS.header
+        },
+        {
+          type: "lms-nav",
+          name: "Construção 2: Menu Sticky",
+          desc: "Navegação glassmorphism responsiva",
+          requiresLmsCss: true,
+          icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="5" rx="1"/><path d="M5 14h14"/></svg>`,
+          html: LMS_BLOCKS.nav
+        },
+        {
+          type: "lms-about",
+          name: "Construção 2: Sobre Nós",
+          desc: "Cartão claro com borda lateral dourada",
+          requiresLmsCss: true,
+          icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 13h10M7 17h6"/></svg>`,
+          html: LMS_BLOCKS.about
+        },
+        {
+          type: "lms-services",
+          name: "Construção 2: Serviços (6 Cards)",
+          desc: "Serralheria, Hidráulica, Elétrica e reformas",
+          requiresLmsCss: true,
+          icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="5" height="7" rx="1"/><rect x="9.5" y="4" width="5" height="7" rx="1"/><rect x="16" y="4" width="5" height="7" rx="1"/><rect x="3" y="13" width="5" height="7" rx="1"/><rect x="9.5" y="13" width="5" height="7" rx="1"/><rect x="16" y="13" width="5" height="7" rx="1"/></svg>`,
+          html: LMS_BLOCKS.services
+        },
+        {
+          type: "lms-gallery",
+          name: "Construção 2: Galeria Lightbox",
+          desc: "Grade 6 fotos de obras com ampliação",
+          requiresLmsCss: true,
+          icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>`,
+          html: LMS_BLOCKS.gallery
+        },
+        {
+          type: "lms-contact",
+          name: "Construção 2: Contato & Rodapé",
+          desc: "Endereço, e-mail copiável e rodapé",
+          requiresLmsCss: true,
+          icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`,
+          html: () => `${LMS_BLOCKS.contact()}\n${LMS_BLOCKS.footer()}`
+        },
+        {
           type: "ua-header",
           name: "Tech: Cabeçalho + Submenu",
           desc: "Menu dark com logo, submenu e CTA",
@@ -2986,6 +3314,31 @@ ${UA_BUTTON_EFFECTS_CSS}
             MM_BLOCKS.newsAndBlog(),
             MM_BLOCKS.recruitment(),
             MM_BLOCKS.contactsAndFooter()
+          ].join("\n")
+        },
+        {
+          id: "construcao-2-lms",
+          name: "Construção 2 — LMS Serralheria",
+          category: "Construção Civil & EPI",
+          desc: "Serralheria, estruturas metálicas e reformas com fundo parallax, menu sticky glass, 6 serviços, galeria lightbox e contato.",
+          title: "LMS Serralheria — Soluções em Estruturas Metálicas | São Paulo",
+          tokens: {
+            "--accent": "#f5a623", "--accent-ink": "#111111", "--ink": "#333333", "--muted": "#555555",
+            "--bg": "#111111", "--soft": "#222222", "--line": "rgba(245, 166, 35, 0.28)", "--card": "rgba(255, 255, 255, 0.94)",
+            "--font": 'ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif',
+            "--radius": "12px", "--btn-radius": "8px", "--maxw": "1200px"
+          },
+          extraStyles: LMS_TEMPLATE_CSS,
+          body: [
+            LMS_BLOCKS.pageBg(),
+            LMS_BLOCKS.header(),
+            LMS_BLOCKS.nav(),
+            LMS_BLOCKS.welcome(),
+            LMS_BLOCKS.about(),
+            LMS_BLOCKS.services(),
+            LMS_BLOCKS.gallery(),
+            LMS_BLOCKS.contact(),
+            LMS_BLOCKS.footer()
           ].join("\n")
         },
         {
@@ -3474,7 +3827,7 @@ ${UA_BUTTON_EFFECTS_CSS}
           return;
         }
 
-        if (el.closest(".ua5-article__media, .ua9-more-card__media, .mm-prod-card__media, .mm-blog-card__media")) {
+        if (el.closest(".ua5-article__media, .ua9-more-card__media, .mm-prod-card__media, .mm-blog-card__media, .lms-galeria-img-box")) {
           el.style.width = "100%";
           el.style.height = "100%";
           el.style.objectFit = "cover";
@@ -3522,6 +3875,12 @@ ${UA_BUTTON_EFFECTS_CSS}
     document.querySelectorAll(".ua-header-widget__nav-item.is-submenu-open").forEach(function(it){
       it.classList.remove("is-submenu-open");
     });
+    var lmsUl=document.querySelector(".lms-nav ul");
+    if(lmsUl){
+      lmsUl.classList.remove("open");
+      var lmsTg=document.querySelector(".lms-menu-toggle");
+      if(lmsTg) lmsTg.setAttribute("aria-expanded","false");
+    }
   }
   function spawnRipple(btn,ev){
     if(!btn || !ev) return;
@@ -3566,8 +3925,119 @@ ${UA_BUTTON_EFFECTS_CSS}
     modal.classList.add("open");
     return true;
   }
+  function openLmsLightbox(item){
+    var img=item.querySelector("img");
+    if(!img) return;
+    var lb=document.getElementById("lms-lightbox");
+    if(!lb){
+      lb=document.createElement("div");
+      lb.id="lms-lightbox";
+      lb.setAttribute("aria-hidden","true");
+      lb.innerHTML='<div class="lms-lightbox-content"><button type="button" class="lms-lightbox-close" id="lms-lightbox-close" aria-label="Fechar">&times;</button><img id="lms-lightbox-img" src="" alt="" /><div class="lms-lightbox-caption"><div><strong id="lms-lightbox-title" style="color:var(--accent,#f5a623);"></strong><div id="lms-lightbox-desc" style="font-size:0.92rem;color:#ccc;"></div></div></div></div>';
+      document.body.appendChild(lb);
+      lb.addEventListener("click",function(ev){
+        if(ev.target===lb || ev.target.closest("#lms-lightbox-close")){
+          lb.classList.remove("open");
+          lb.setAttribute("aria-hidden","true");
+        }
+      });
+    }
+    document.getElementById("lms-lightbox-img").src=img.currentSrc||img.src;
+    document.getElementById("lms-lightbox-img").alt=img.alt||"";
+    var titleEl=item.getAttribute("data-title")||(item.querySelector("strong")&&item.querySelector("strong").textContent)||"Projeto";
+    var descEl=item.getAttribute("data-desc")||"";
+    document.getElementById("lms-lightbox-title").textContent=titleEl;
+    document.getElementById("lms-lightbox-desc").textContent=descEl;
+    lb.classList.add("open");
+    lb.setAttribute("aria-hidden","false");
+  }
+  function showLmsToast(msg){
+    var toast=document.getElementById("lms-toast");
+    if(!toast){
+      toast=document.createElement("div");
+      toast.id="lms-toast";
+      document.body.appendChild(toast);
+    }
+    toast.textContent=msg||"E-mail copiado para a área de transferência!";
+    toast.classList.add("show");
+    clearTimeout(toast._t);
+    toast._t=setTimeout(function(){ toast.classList.remove("show"); },2800);
+  }
+  function ensureLmsBackToTop(){
+    if(!document.querySelector(".lms-hero,.lms-nav,.lms-galeria,.lms-contato")) return;
+    if(!document.getElementById("lms-back-to-top")){
+      var btt=document.createElement("button");
+      btt.id="lms-back-to-top";
+      btt.className="lms-back-to-top";
+      btt.type="button";
+      btt.setAttribute("aria-label","Voltar ao topo");
+      btt.innerHTML="&#8593;";
+      btt.addEventListener("click",function(){
+        if(isEditing()) return;
+        window.scrollTo({top:0,behavior:"smooth"});
+      });
+      document.body.appendChild(btt);
+    }
+  }
+  function setupLmsReveal(){
+    var els=document.querySelectorAll(".lms-reveal");
+    if(!els.length) return;
+    document.documentElement.classList.add("lms-anim-ready");
+    if(!("IntersectionObserver" in window)){
+      els.forEach(function(el){ el.classList.add("visible"); });
+      return;
+    }
+    var obs=new IntersectionObserver(function(entries){
+      entries.forEach(function(entry,idx){
+        if(entry.isIntersecting){
+          setTimeout(function(){ entry.target.classList.add("visible"); },(idx%3)*80);
+          obs.unobserve(entry.target);
+        }
+      });
+    },{threshold:0.08});
+    els.forEach(function(el){ obs.observe(el); });
+  }
+  document.addEventListener("error",function(e){
+    var img=e.target;
+    if(!img || img.tagName!=="IMG" || !img.closest(".lms-galeria-item")) return;
+    if(img.dataset.lmsFallbackDone) return;
+    img.dataset.lmsFallbackDone="1";
+    var card=img.closest(".lms-galeria-item");
+    var label=(card && card.getAttribute("data-title"))||img.alt||"Projeto";
+    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1e1e1e"/><stop offset="100%" stop-color="#353535"/></linearGradient></defs><rect width="800" height="500" fill="url(#g)"/><rect x="40" y="40" width="720" height="420" fill="none" stroke="#f5a623" stroke-width="3" stroke-opacity="0.6" rx="12"/><text x="50%" y="48%" fill="#f5a623" font-family="Arial,sans-serif" font-size="28" font-weight="bold" text-anchor="middle">'+label.replace(/[<>&"]/g,"")+'</text><text x="50%" y="56%" fill="#cccccc" font-family="Arial,sans-serif" font-size="18" text-anchor="middle">L.M.S. Serralheria</text></svg>';
+    img.src="data:image/svg+xml;charset=UTF-8,"+encodeURIComponent(svg);
+  },true);
   document.addEventListener("click",function(e){
     if(isEditing()) return;
+    var lmsToggle=e.target.closest(".lms-menu-toggle");
+    if(lmsToggle){
+      e.preventDefault();
+      var navList=lmsToggle.parentElement&&lmsToggle.parentElement.querySelector("ul");
+      if(navList){
+        var isOpen=navList.classList.toggle("open");
+        lmsToggle.setAttribute("aria-expanded",isOpen?"true":"false");
+      }
+      return;
+    }
+    var lmsCopyBtn=e.target.closest(".lms-copy-btn");
+    if(lmsCopyBtn){
+      e.preventDefault();
+      var box=lmsCopyBtn.closest("p,.lms-contato")||document;
+      var mailEl=box.querySelector('a[href^="mailto:"]');
+      var email=(mailEl&&mailEl.textContent.trim())||"lmserralheriasolda@gmail.com";
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(email).then(function(){ showLmsToast("E-mail copiado: "+email); }).catch(function(){ showLmsToast("E-mail: "+email); });
+      }else{
+        showLmsToast("E-mail: "+email);
+      }
+      return;
+    }
+    var lmsGalleryItem=e.target.closest(".lms-galeria-item");
+    if(lmsGalleryItem){
+      e.preventDefault();
+      openLmsLightbox(lmsGalleryItem);
+      return;
+    }
     var toggle=e.target.closest(".ua-header-widget__toggle");
     if(toggle){
       e.preventDefault();
@@ -3632,7 +4102,7 @@ ${UA_BUTTON_EFFECTS_CSS}
       }
       return;
     }
-    if(!e.target.closest(".ua-header-widget") && !e.target.closest(".mm-header-wrap")){
+    if(!e.target.closest(".ua-header-widget") && !e.target.closest(".mm-header-wrap") && !e.target.closest(".lms-nav")){
       closeMenus();
     }
   });
@@ -3642,6 +4112,8 @@ ${UA_BUTTON_EFFECTS_CSS}
       closeMenus();
       var modal=document.getElementById("ua-article-modal");
       if(modal) modal.classList.remove("open");
+      var lb=document.getElementById("lms-lightbox");
+      if(lb){ lb.classList.remove("open"); lb.setAttribute("aria-hidden","true"); }
     }
   });
   window.addEventListener("scroll",function(){
@@ -3650,7 +4122,25 @@ ${UA_BUTTON_EFFECTS_CSS}
     document.querySelectorAll(".ua-header-widget,.mm-header-wrap").forEach(function(h){
       h.classList.toggle("is-scrolled",scrolled);
     });
+    var btt=document.getElementById("lms-back-to-top");
+    if(btt) btt.classList.toggle("show",window.scrollY>400);
+    var lmsLinks=document.querySelectorAll(".lms-nav a[href^='#']");
+    if(lmsLinks.length){
+      var sy=window.scrollY;
+      document.querySelectorAll("section[id]").forEach(function(sec){
+        var top=sec.offsetTop-120;
+        var h=sec.offsetHeight;
+        var id=sec.getAttribute("id");
+        if(sy>=top && sy<top+h){
+          lmsLinks.forEach(function(a){
+            a.classList.toggle("active",a.getAttribute("href")==="#"+id);
+          });
+        }
+      });
+    }
   },{passive:true});
+  setupLmsReveal();
+  ensureLmsBackToTop();
 })();`;
       }
 
@@ -3724,7 +4214,7 @@ ${buildRootCssString(state.tokens)}
         if (!iframeDoc || !iframeDoc.body) return;
         const children = Array.from(iframeDoc.body.children);
         children.forEach(el => {
-          if (el.id === "editor-overlay-root" || el.tagName === "SCRIPT" || el.tagName === "STYLE") return;
+          if (el.id === "editor-overlay-root" || el.id === "lms-lightbox" || el.id === "lms-toast" || el.id === "lms-back-to-top" || el.tagName === "SCRIPT" || el.tagName === "STYLE") return;
 
           if (el.tagName === "MAIN" && el.children.length >= 2) {
             Array.from(el.children).forEach(sub => {
@@ -3744,6 +4234,15 @@ ${buildRootCssString(state.tokens)}
         const tag = el.tagName.toLowerCase();
         const cls = (typeof el.className === "string" ? el.className : "").toLowerCase();
         const id = (el.id || "").toLowerCase();
+        if (cls.includes("lms-page-bg")) return "Fundo Fixo";
+        if (cls.includes("lms-hero")) return "Hero Serralheria";
+        if (cls.includes("lms-nav")) return "Menu Serralheria";
+        if (cls.includes("lms-sobre")) return "Sobre Nós";
+        if (cls.includes("lms-galeria")) return "Galeria Serralheria";
+        if (cls.includes("lms-contato")) return "Contato Serralheria";
+        if (cls.includes("lms-footer")) return "Rodapé Serralheria";
+        if (cls.includes("lms-section") && id === "inicio") return "Boas-vindas";
+        if (cls.includes("lms-section") && id === "servicos") return "Serviços Serralheria";
         if (cls.includes("mm-header-wrap")) return "Cabeçalho M&M";
         if (cls.includes("mm-hero")) return "Hero EPI";
         if (cls.includes("mm-footer")) return "Rodapé M&M";
@@ -3774,7 +4273,7 @@ ${buildRootCssString(state.tokens)}
         if (!iframeDoc || !iframeDoc.body) return [];
         const list = [];
         Array.from(iframeDoc.body.children).forEach(el => {
-          if (el.id === "editor-overlay-root" || el.id === "ua-article-modal" || el.tagName === "SCRIPT" || el.tagName === "STYLE") return;
+          if (el.id === "editor-overlay-root" || el.id === "ua-article-modal" || el.id === "lms-lightbox" || el.id === "lms-toast" || el.id === "lms-back-to-top" || el.tagName === "SCRIPT" || el.tagName === "STYLE") return;
           if (el.tagName === "MAIN" && !el.dataset.blockId) {
             Array.from(el.children).forEach(sub => {
               if (sub.dataset && sub.dataset.blockId) list.push(sub);
@@ -3791,9 +4290,9 @@ ${buildRootCssString(state.tokens)}
         const bodyClone = iframeDoc.body.cloneNode(true);
         const overlay = bodyClone.querySelector("#editor-overlay-root");
         if (overlay) overlay.remove();
-        bodyClone.querySelectorAll("script[data-editor-runtime], #ua-article-modal, .ua-ripple").forEach(n => n.remove());
-        bodyClone.querySelectorAll(".is-selected, .is-menu-open, .is-submenu-open, .is-scrolled").forEach(n => {
-          n.classList.remove("is-selected", "is-menu-open", "is-submenu-open", "is-scrolled");
+        bodyClone.querySelectorAll("script[data-editor-runtime], #ua-article-modal, #lms-lightbox, #lms-toast, #lms-back-to-top, .ua-ripple").forEach(n => n.remove());
+        bodyClone.querySelectorAll(".is-selected, .is-menu-open, .is-submenu-open, .is-scrolled, .visible").forEach(n => {
+          n.classList.remove("is-selected", "is-menu-open", "is-submenu-open", "is-scrolled", "visible");
         });
         bodyClone.querySelectorAll("[contenteditable]").forEach(n => n.removeAttribute("contenteditable"));
         bodyClone.querySelectorAll("[data-el-selected]").forEach(n => n.removeAttribute("data-el-selected"));
@@ -3874,6 +4373,7 @@ ${buildRootCssString(state.tokens)}
         ".ua5-stat", ".ua5-service-card", ".ua5-case", ".ua5-article", ".ua9-more-card",
         ".ua5-process__steps > article", ".ua7-tech__service", ".ua73-techlogo",
         ".mm-prod-card", ".mm-promo-card", ".mm-blog-card", ".mm-brand-tile", ".mm-stat-box",
+        ".lms-servico-card", ".lms-galeria-item",
         ".card", ".plan", ".product", "figure"
       ].join(",");
 
@@ -4345,7 +4845,7 @@ ${buildRootCssString(state.tokens)}
         let refBlockId = dropTarget && dropTarget.refBlock ? dropTarget.refBlock.dataset.blockId : null;
         const dropPos = dropTarget ? dropTarget.position : null;
 
-        if (state.isClonedCustom && !def.requiresUaCss && !def.requiresMmCss && !state.needsBaseCssForAddedBlocks) {
+        if (state.isClonedCustom && !def.requiresUaCss && !def.requiresMmCss && !def.requiresLmsCss && !state.needsBaseCssForAddedBlocks) {
           state.needsBaseCssForAddedBlocks = true;
           needsRerender = true;
         }
@@ -4361,6 +4861,10 @@ ${buildRootCssString(state.tokens)}
           state.extraStyles = (state.extraStyles ? state.extraStyles + "\n" : "") + MM_TEMPLATE_CSS;
           needsRerender = true;
         }
+        if (def.requiresLmsCss && !state.extraStyles.includes("LMS_SERRALHERIA_V1")) {
+          state.extraStyles = (state.extraStyles ? state.extraStyles + "\n" : "") + LMS_TEMPLATE_CSS;
+          needsRerender = true;
+        }
 
         if (needsRerender) {
           const currentHtml = getCleanBodyHtmlForHistory();
@@ -4371,24 +4875,30 @@ ${buildRootCssString(state.tokens)}
 
         const temp = iframeDoc.createElement("div");
         temp.innerHTML = def.html().trim();
-        const newEl = temp.firstElementChild;
-        newEl.dataset.blockId = nextBlockId();
-        newEl.dataset.blockType = def.name;
-
+        const insertedEls = Array.from(temp.children);
         const overlayRoot = iframeDoc.getElementById("editor-overlay-root");
-        if (resolvedRefBlock && resolvedRefBlock.parentNode) {
-          const parent = resolvedRefBlock.parentNode;
-          if (dropPos === "before") {
-            parent.insertBefore(newEl, resolvedRefBlock);
-          } else {
-            parent.insertBefore(newEl, resolvedRefBlock.nextSibling);
-          }
-        } else {
-          iframeDoc.body.insertBefore(newEl, overlayRoot);
-        }
 
-        selectBlock(newEl.dataset.blockId);
-        newEl.scrollIntoView({ behavior: "smooth", block: "center" });
+        insertedEls.forEach((newEl, i) => {
+          newEl.dataset.blockId = nextBlockId();
+          newEl.dataset.blockType = i === 0 ? def.name : inferBlockType(newEl);
+
+          if (resolvedRefBlock && resolvedRefBlock.parentNode) {
+            const parent = resolvedRefBlock.parentNode;
+            if (dropPos === "before") {
+              parent.insertBefore(newEl, resolvedRefBlock);
+            } else {
+              parent.insertBefore(newEl, resolvedRefBlock.nextSibling);
+            }
+          } else {
+            iframeDoc.body.insertBefore(newEl, overlayRoot);
+          }
+        });
+
+        const primaryEl = insertedEls[0];
+        if (primaryEl) {
+          selectBlock(primaryEl.dataset.blockId);
+          primaryEl.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
         pushHistory();
         if (isMobileEditorLayout()) setMobileDrawer("canvas");
         showToast(`Bloco "${def.name}" adicionado`);
@@ -4461,6 +4971,7 @@ ${buildRootCssString(state.tokens)}
       function renderBlockLibrary() {
         blockLibraryEl.innerHTML = "";
         let addedMmDivider = false;
+        let addedLmsDivider = false;
         let addedTechDivider = false;
 
         BLOCK_LIBRARY.forEach(b => {
@@ -4470,6 +4981,15 @@ ${buildRootCssString(state.tokens)}
             sep.className = "panel-section-title";
             sep.style.marginTop = "16px";
             sep.textContent = "Blocos Construção & EPI";
+            blockLibraryEl.appendChild(sep);
+          }
+
+          if (b.requiresLmsCss && !addedLmsDivider) {
+            addedLmsDivider = true;
+            const sep = document.createElement("div");
+            sep.className = "panel-section-title";
+            sep.style.marginTop = "16px";
+            sep.textContent = "Blocos Construção 2 (Serralheria)";
             blockLibraryEl.appendChild(sep);
           }
 
@@ -4718,7 +5238,15 @@ ${buildRootCssString(state.tokens)}
           || block.classList.contains("mm-header-wrap")
           || block.classList.contains("mm-hero")
           || block.classList.contains("mm-section")
-          || block.classList.contains("mm-footer");
+          || block.classList.contains("mm-footer")
+          || block.classList.contains("lms-page-bg")
+          || block.classList.contains("lms-hero")
+          || block.classList.contains("lms-nav")
+          || block.classList.contains("lms-section")
+          || block.classList.contains("lms-sobre")
+          || block.classList.contains("lms-galeria")
+          || block.classList.contains("lms-contato")
+          || block.classList.contains("lms-footer");
 
         if (!state.isClonedCustom && block.tagName === "SECTION" && !isCta && !isCustomTechOrDental) {
           variantHtml += `
@@ -4935,7 +5463,7 @@ ${buildRootCssString(state.tokens)}
       function openSectionHtmlEditor(block) {
         htmlEditingBlock = block;
         const clone = block.cloneNode(true);
-        clone.classList.remove("is-selected", "is-menu-open", "is-submenu-open", "is-scrolled");
+        clone.classList.remove("is-selected", "is-menu-open", "is-submenu-open", "is-scrolled", "visible");
         clone.removeAttribute("data-block-id");
         clone.removeAttribute("data-block-type");
         clone.querySelectorAll(".ua-ripple").forEach(n => n.remove());
@@ -5172,7 +5700,7 @@ ${buildRootCssString(state.tokens)}
             if (!isBgImage) {
               autoFitImageToContainer(el, el.naturalWidth || 1600, el.naturalHeight || 900);
             } else {
-              el.style.backgroundSize = "contain";
+              el.style.backgroundSize = "cover";
               el.style.backgroundPosition = "center";
               el.style.backgroundRepeat = "no-repeat";
             }
@@ -5565,6 +6093,7 @@ ${buildRootCssString(state.tokens)}
           const ink = tpl.tokens["--ink"];
 
           const isMmProtek = tpl.id === "mm-protek-construcao";
+          const isConstrucao2 = tpl.id === "construcao-2-lms";
           const isDentalHero = tpl.id === "dental-moderna";
           const isUaTech = tpl.id === "TECHNOCYBBER";
 
@@ -5592,6 +6121,32 @@ ${buildRootCssString(state.tokens)}
                     <span style="width:72%;height:7px;border-radius:2px;background:#fbbf24;"></span>
                     <span style="width:90%;height:4px;border-radius:2px;background:rgba(255,255,255,0.65);"></span>
                   </div>
+                </div>
+              </div>
+            </div>`;
+          } else if (isConstrucao2) {
+            thumbHtml = `
+            <div class="tpl-thumb" style="background:#18181b;">
+              <div class="tpl-mini-browser" style="background:linear-gradient(180deg,#27272a,#111111);color:#fff;border-color:rgba(245,166,35,0.35);">
+                <div class="tpl-mini-hero" style="padding:10px;gap:5px;align-items:center;justify-items:center;text-align:center;">
+                  <span style="width:46%;height:6px;border-radius:99px;background:rgba(245,166,35,0.35);border:1px solid #f5a623;"></span>
+                  <span style="width:68%;height:8px;border-radius:2px;background:#ffffff;"></span>
+                  <span style="width:54%;height:4px;border-radius:2px;background:rgba(255,255,255,0.65);"></span>
+                  <div style="display:flex;gap:5px;margin-top:2px;">
+                    <span style="width:34px;height:10px;border-radius:3px;background:#f5a623;"></span>
+                    <span style="width:34px;height:10px;border-radius:3px;border:1px solid rgba(255,255,255,0.5);"></span>
+                  </div>
+                </div>
+                <div style="height:12px;background:#101010;border-top:1px solid rgba(245,166,35,0.45);border-bottom:1px solid rgba(245,166,35,0.25);display:flex;justify-content:center;align-items:center;gap:6px;">
+                  <span style="width:14px;height:3px;border-radius:2px;background:#f5a623;"></span>
+                  <span style="width:14px;height:3px;border-radius:2px;background:#d4d4d8;"></span>
+                  <span style="width:14px;height:3px;border-radius:2px;background:#d4d4d8;"></span>
+                  <span style="width:14px;height:3px;border-radius:2px;background:#d4d4d8;"></span>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px;padding:7px 10px;background:rgba(0,0,0,0.35);">
+                  <span style="height:18px;border-radius:4px;background:rgba(255,255,255,0.92);border-top:2px solid #f5a623;"></span>
+                  <span style="height:18px;border-radius:4px;background:rgba(255,255,255,0.92);border-top:2px solid #f5a623;"></span>
+                  <span style="height:18px;border-radius:4px;background:rgba(255,255,255,0.92);border-top:2px solid #f5a623;"></span>
                 </div>
               </div>
             </div>`;
@@ -5790,7 +6345,7 @@ ${buildRootCssString(state.tokens)}
             setCloneStatus("Acesso direto bloqueado por CORS. Tentando leitor auxiliar...", "info");
             const proxyUrl = "https://api.allorigins.win/raw?url=" + encodeURIComponent(url);
             const proxyRes = await fetch(proxyUrl);
-            if (!proxyRes.ok) throw new Error("Falha no leitor auxiliar (" + proxyRes.status + ")");
+           if (!proxyRes.ok) throw new Error("Falha no leitor auxiliar (" + proxyRes.status + ")");
             htmlText = await proxyRes.text();
           }
 
@@ -5924,9 +6479,9 @@ ${buildRootCssString(state.tokens)}
         if (overlay) overlay.remove();
 
         bodyClone.classList.remove("preview-mode");
-        bodyClone.querySelectorAll("script[data-editor-runtime], #ua-article-modal, .ua-ripple").forEach(n => n.remove());
-        bodyClone.querySelectorAll(".is-selected, .is-menu-open, .is-submenu-open, .is-scrolled").forEach(n => {
-          n.classList.remove("is-selected", "is-menu-open", "is-submenu-open", "is-scrolled");
+        bodyClone.querySelectorAll("script[data-editor-runtime], #ua-article-modal, #lms-lightbox, #lms-toast, #lms-back-to-top, .ua-ripple").forEach(n => n.remove());
+        bodyClone.querySelectorAll(".is-selected, .is-menu-open, .is-submenu-open, .is-scrolled, .visible").forEach(n => {
+          n.classList.remove("is-selected", "is-menu-open", "is-submenu-open", "is-scrolled", "visible");
         });
         bodyClone.querySelectorAll("[data-block-id]").forEach(n => {
           n.removeAttribute("data-block-id");
@@ -6079,7 +6634,7 @@ ${bodyClone.innerHTML.trim()}${runtimeScript}
             frameWrap.classList.remove("tablet", "mobile");
             if (state.viewport !== "desktop") frameWrap.classList.add(state.viewport);
             setTimeout(updateToolbarPosition, 260);
-			});
+          });
         });
 
         btnUndo.addEventListener("click", () => applyHistoryIndex(state.historyIndex - 1));
@@ -6098,10 +6653,14 @@ ${bodyClone.innerHTML.trim()}${runtimeScript}
           }
           if (iframeDoc && iframeDoc.body) {
             iframeDoc.body.classList.toggle("preview-mode", state.previewMode);
-            if (!state.previewMode) {
+            if (state.previewMode) {
+              iframeDoc.querySelectorAll(".lms-reveal").forEach(el => el.classList.add("visible"));
+            } else {
               iframeDoc.querySelectorAll(".is-menu-open, .is-submenu-open, .is-scrolled").forEach(n => n.classList.remove("is-menu-open", "is-submenu-open", "is-scrolled"));
               const modal = iframeDoc.getElementById("ua-article-modal");
               if (modal) modal.remove();
+              const lb = iframeDoc.getElementById("lms-lightbox");
+              if (lb) { lb.classList.remove("open"); lb.setAttribute("aria-hidden", "true"); }
             }
           }
         });
@@ -6142,6 +6701,15 @@ ${bodyClone.innerHTML.trim()}${runtimeScript}
               }
               if (!snap.isClonedCustom && (snap.bodyHtml.includes("mm-header-wrap") || snap.bodyHtml.includes("mm-hero")) && !state.extraStyles.includes("MM_PROTEK_V1")) {
                 state.extraStyles += "\n" + MM_TEMPLATE_CSS;
+              }
+              if (!snap.isClonedCustom && (snap.bodyHtml.includes("lms-hero") || snap.bodyHtml.includes("lms-section")) && !state.extraStyles.includes("LMS_SERRALHERIA_V1")) {
+                state.extraStyles += "\n" + LMS_TEMPLATE_CSS;
+              }
+              if (snap.bodyHtml.includes("photo-1689961476750-43475ea1cc1b")) {
+                snap.bodyHtml = snap.bodyHtml.replace(/https:\/\/images\.unsplash\.com\/photo-1689961476750-43475ea1cc1b[^'")\s]*/g, "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1600&q=85");
+              }
+              if (snap.bodyHtml.includes("photo-1790377844086-06d7c1b92106")) {
+                snap.bodyHtml = snap.bodyHtml.replace(/https:\/\/images\.unsplash\.com\/photo-1790377844086-06d7c1b92106[^'")\s]*/g, "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=900&q=80");
               }
               state.extraLinks = snap.extraLinks || [];
               state.isClonedCustom = !!snap.isClonedCustom;
