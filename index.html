@@ -1032,6 +1032,25 @@
                 <input type="text" class="input" data-token-text="--muted" />
               </div>
             </div>
+            <div class="field">
+              <label>Fundo dos Cards</label>
+              <div class="color-row">
+                <input type="color" class="color-swatch" data-token="--card" />
+                <input type="text" class="input" data-token-text="--card" />
+              </div>
+            </div>
+
+            <div class="divider-line"></div>
+            <div class="panel-section-title">Imagem de Fundo da Página</div>
+            <div class="field">
+              <label>Enviar Imagem do PC (Alta Res.)</label>
+              <input class="input" id="theme-bg-img-file" type="file" accept="image/*" />
+            </div>
+            <div class="field">
+              <label>Ou URL da Imagem de Fundo</label>
+              <input class="input" id="theme-bg-img-url" type="text" placeholder="https://exemplo.com/fundo.jpg" />
+            </div>
+            <button class="ui-btn" id="theme-bg-img-clear" style="width:100%;">Remover Imagem de Fundo da Página</button>
 
             <div class="divider-line"></div>
             <div class="panel-section-title">Tipografia e Formas</div>
@@ -1094,7 +1113,7 @@
               <strong>Como editar:</strong><br /><br />
               • Clique em qualquer <strong>texto</strong> na página para digitar em tempo real.<br />
               • Clique em <strong>imagens</strong> para enviar arquivo do PC, arrastar uma foto ou ajustar em alta resolução.<br />
-              • Clique em <strong>botões</strong>, <strong>cards</strong> ou <strong>seções</strong> para ajustar propriedades, duplicar ou reordenar aqui.
+              • Clique em <strong>botões</strong>, <strong>cards</strong> ou <strong>seções</strong> para ajustar fundo, propriedades, duplicar ou reordenar aqui.
             </div>
           </div>
         </aside>
@@ -1670,13 +1689,12 @@ ${UA_BUTTON_EFFECTS_CSS}
 @media (max-width:380px){
 .ua7-tech__services{grid-template-columns:1fr}
 }`;
-
-      const MM_TEMPLATE_CSS = `/* MM_PROTEK_V1 */
+const MM_TEMPLATE_CSS = `/* MM_PROTEK_V1 */
 .mm-wrap{width:100%;max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,28px)}
 .mm-prod-grid > *,.mm-promo-grid > *,.mm-blog-grid > *,.mm-split > *,.mm-contact-grid > *,.mm-brands-grid > *,.mm-stats-row > *{min-width:0}
 .mm-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--accent,#dc2626);margin-bottom:12px}
 
-/* Cabeçalho idêntico à imagem (Barra cinza + Navbar branca) */
+/* Cabeçalho (Barra cinza + Navbar branca) */
 .mm-header-wrap{position:relative;z-index:45;background:#ffffff;box-shadow:0 6px 22px rgba(15,23,42,.08);transition:box-shadow .25s ease}
 .mm-header-wrap.is-scrolled{box-shadow:0 12px 32px rgba(15,23,42,.16)}
 .mm-topbar{background:linear-gradient(90deg,#4c4f52 0%,#5f6367 52%,#8f9397 86%,#aeb2b6 100%);border-bottom:1px solid rgba(0,0,0,.15);color:#ffffff}
@@ -1706,7 +1724,7 @@ ${UA_BUTTON_EFFECTS_CSS}
 .mm-toggle{display:none;flex-direction:column;gap:4px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:9px;cursor:pointer;flex-shrink:0}
 .mm-toggle span{width:20px;height:2px;background:#111827;border-radius:2px;transition:transform .22s ease,opacity .2s ease}
 
-/* Hero Banner (fiel à imagem) */
+/* Hero Banner */
 .mm-hero{position:relative;min-height:540px;display:flex;align-items:flex-end;overflow:hidden;background:linear-gradient(135deg,#292524,#44403c)}
 .mm-hero__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 38%;z-index:0}
 .mm-hero__scrim{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(15,23,42,.08) 0%,rgba(15,23,42,.22) 45%,rgba(10,12,16,.76) 100%),radial-gradient(circle at 82% 85%,rgba(0,0,0,.62),transparent 58%)}
@@ -1724,7 +1742,7 @@ ${UA_BUTTON_EFFECTS_CSS}
 .mm-sec-head p{margin-top:10px;font-size:15.5px;line-height:1.6;color:var(--muted,#4b5563);max-width:54ch}
 .mm-section--dark .mm-sec-head p{color:#9ca3af}
 
-/* Botões base com estilo idêntico ao Tecnologia */
+/* Botões */
 .mm-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;max-width:100%;padding:12px 22px;border-radius:var(--btn-radius,10px);border:1px solid transparent;font-size:14px;font-weight:700;text-decoration:none;white-space:normal;text-align:center}
 .mm-btn--primary{background:linear-gradient(135deg,var(--accent,#dc2626),#b91c1c);color:var(--accent-ink,#ffffff);box-shadow:0 10px 26px rgba(220,38,38,.28)}
 .mm-btn--amber{background:linear-gradient(135deg,#f59e0b,#d97706);color:#111827;box-shadow:0 10px 26px rgba(245,158,11,.28)}
@@ -1793,9 +1811,7 @@ ${UA_BUTTON_EFFECTS_CSS}
 .mm-footer__nav a{padding:7px 12px;border-radius:8px;border:1px solid transparent;font-size:13px;font-weight:600;color:#cbd5e1;text-decoration:none}
 .mm-footer__bottom{display:flex;align-items:center;justify-content:space-between;gap:12px 16px;flex-wrap:wrap;padding-top:20px;font-size:12.5px;color:#94a3b8}
 
-/* =========================================================================
-   MESMOS EFEITOS DE BOTÕES DO TEMPLATE TECNOLOGIA (SHINE + HOVER + RIPPLE)
-   ========================================================================= */
+/* Efeitos de Botões */
 .mm-topbar__phone,.mm-nav a,.mm-btn,.mm-card__link,.mm-article__link,.mm-toggle,.mm-footer__nav a{position:relative;overflow:hidden;cursor:pointer;transition:transform .2s ease,box-shadow .22s ease,border-color .2s ease,background .2s ease,color .2s ease,filter .2s ease}
 
 .mm-topbar__phone::before,.mm-nav a::before,.mm-btn::before,.mm-card__link::before,.mm-article__link::before,.mm-toggle::before,.mm-footer__nav a::before{content:"";position:absolute;top:0;left:-125%;width:65%;height:100%;background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.35) 50%,transparent 100%);transform:skewX(-20deg);transition:left .55s ease;pointer-events:none}
@@ -1860,7 +1876,7 @@ ${UA_BUTTON_EFFECTS_CSS}
 
       const LMS_TEMPLATE_CSS = `/* LMS_SERRALHERIA_V1 */
 html{scroll-behavior:smooth;scroll-padding-top:70px}
-.lms-page-bg{position:fixed;inset:0;z-index:0;background-color:#141619;background-size:cover;background-position:center center;background-repeat:no-repeat;transform:scale(1.02);transition:background-image .4s ease;pointer-events:none}
+.lms-page-bg{position:fixed;inset:0;z-index:0;background-color:var(--bg,#141619);background-size:cover;background-position:center center;background-repeat:no-repeat;transform:scale(1.02);transition:background-image .4s ease;pointer-events:none}
 .lms-page-bg-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.36) 0%,rgba(14,14,14,.64) 45%,rgba(10,10,10,.82) 100%);pointer-events:none}
 .lms-hero,.lms-section,.lms-sobre,.lms-galeria,.lms-contato,.lms-footer{position:relative;z-index:1}
 
@@ -2005,6 +2021,10 @@ to{opacity:1;transform:translateY(0)}
           z-index: 0 !important;
           transition: outline-color 0.12s;
         }
+        body:not(.preview-mode) [data-block-id].lms-page-bg {
+          pointer-events: auto !important;
+          cursor: pointer;
+        }
         body:not(.preview-mode) [data-block-id]:hover {
           outline: 2px dashed rgba(37, 99, 235, 0.45);
           outline-offset: -2px;
@@ -2104,6 +2124,8 @@ to{opacity:1;transform:translateY(0)}
           white-space: nowrap;
         }
       `;
+
+      const LMS_DEFAULT_BG_URL = "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1600&q=85";
 
       function makeSvgArt(c1 = "#1e3a8a", c2 = "#2b59ff", accent = "#7dd3fc", style = "waves", w = 1200, h = 900) {
         let shapes = "";
@@ -2460,7 +2482,7 @@ to{opacity:1;transform:translateY(0)}
       };
 
       const LMS_BLOCKS = {
-        pageBg: () => `<div class="lms-page-bg" style="background-image:url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1600&q=85')">
+        pageBg: () => `<div class="lms-page-bg" style="background-image:url('${LMS_DEFAULT_BG_URL}')">
   <div class="lms-page-bg-overlay" aria-hidden="true"></div>
 </div>`,
 
@@ -2752,7 +2774,7 @@ to{opacity:1;transform:translateY(0)}
           "tech-claude": wrap(48, 48, `<path d="M24 5V43M5 24H43M10.5 10.5L37.5 37.5M37.5 10.5L10.5 37.5" stroke="#d97706" stroke-width="3.2" stroke-linecap="round"/>`, 4),
           "tech-codex": wrap(48, 48, `<rect x="6" y="8" width="36" height="32" rx="8" fill="#0f172a"/><path d="M18 19L13 24L18 29M30 19L35 24L30 29M26 17L22 31" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>`, 4),
           "tech-grok": wrap(48, 48, `<circle cx="24" cy="24" r="16" fill="none" stroke="#0f172a" stroke-width="3.2"/><path d="M12 34L36 14" stroke="#0f172a" stroke-width="3.2" stroke-linecap="round"/>`, 4),
-           "tech-starlink": wrap(96, 36, `<path d="M10 28 C28 10 68 8 86 24" fill="none" stroke="#0f172a" stroke-width="3" stroke-linecap="round"/><circle cx="68" cy="15" r="4" fill="#2563eb"/><text x="12" y="30" font-family="sans-serif" font-size="11" font-weight="800" fill="#0f172a" letter-spacing="1.5">SAT-LINK</text>`, 4),
+          "tech-starlink": wrap(96, 36, `<path d="M10 28 C28 10 68 8 86 24" fill="none" stroke="#0f172a" stroke-width="3" stroke-linecap="round"/><circle cx="68" cy="15" r="4" fill="#2563eb"/><text x="12" y="30" font-family="sans-serif" font-size="11" font-weight="800" fill="#0f172a" letter-spacing="1.5">SAT-LINK</text>`, 4),
           "tech-wordpress": wrap(48, 48, `<circle cx="24" cy="24" r="18" fill="none" stroke="#1e3a8a" stroke-width="3"/><path d="M13 17L19 34L24 20L29 34L35 17" fill="none" stroke="#1e3a8a" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>`, 4),
           "tech-elementor": wrap(48, 48, `<rect x="6" y="6" width="36" height="36" rx="9" fill="#be123c"/><rect x="14" y="14" width="5" height="20" rx="1.5" fill="#fff"/><rect x="23" y="14" width="11" height="4.5" rx="1.5" fill="#fff"/><rect x="23" y="21.75" width="11" height="4.5" rx="1.5" fill="#fff"/><rect x="23" y="29.5" width="11" height="4.5" rx="1.5" fill="#fff"/>`, 4)
         };
@@ -3049,8 +3071,7 @@ to{opacity:1;transform:translateY(0)}
   </div>
 </footer>`
       };
-
-      const BLOCK_LIBRARY = [
+	  const BLOCK_LIBRARY = [
         {
           type: "nav",
           name: "Cabeçalho / Menu",
@@ -3569,8 +3590,7 @@ to{opacity:1;transform:translateY(0)}
 <footer class="foot"><div class="wrap"><div class="foot-in"><div><div class="logo">pulse.edu</div><p class="small">Escola prática de produtos digitais, design e tecnologia.</p></div><nav class="foot-links"><a href="#">Ementa</a><a href="#">Termos</a><a href="#">Suporte</a></nav></div><div class="foot-note">© 2026 Pulse Educação. Todos os direitos reservados.</div></div></footer>`
         }
       ];
-
-      // =========================================================================
+	  // =========================================================================
       // 4. ESTADO GLOBAL DO EDITOR
       // =========================================================================
       const state = {
@@ -4163,9 +4183,10 @@ ${buildRootCssString(state.tokens)}
           : `<style data-cloned-vars>${buildRootCssString(state.tokens)}</style>`;
 
         const bodyClassAttr = state.bodyClass ? ` class="${escapeAttr(state.bodyClass)}"` : "";
+        const defaultBodyStyle = "margin:0;background-color:var(--bg,#ffffff)";
         const bodyStyleAttr = state.isClonedCustom
           ? (state.bodyStyle ? ` style="${escapeAttr(state.bodyStyle)}"` : "")
-          : ` style="margin:0;background:var(--bg,#ffffff)"`;
+          : ` style="${escapeAttr(state.bodyStyle || defaultBodyStyle)}"`;
 
         const html = `<!doctype html>
 <html lang="pt-BR">
@@ -4303,6 +4324,9 @@ ${buildRootCssString(state.tokens)}
       // 6. HISTÓRICO (DESFAZER / REFAZER + AUTOSAVE)
       // =========================================================================
       function pushHistory() {
+        if (iframeDoc && iframeDoc.body) {
+          state.bodyStyle = iframeDoc.body.getAttribute("style") || "";
+        }
         const snapshot = {
           pageTitle: state.pageTitle,
           tokens: { ...state.tokens },
@@ -4429,16 +4453,19 @@ ${buildRootCssString(state.tokens)}
         if (!el || !iframeWin) return "";
         const bg = iframeWin.getComputedStyle(el).backgroundImage;
         if (!bg || bg === "none") return "";
-        const match = bg.match(/url\(["']?(.*?)["']?\)/i);
-        return match ? match[1] : "";
+        const match = bg.match(/url\(\s*(['"]?)(.*?)\1\s*\)/i);
+        return match ? match[2] : "";
       }
 
       function findBackgroundImageTarget(rawTarget, blockRoot) {
         let cur = rawTarget;
-        while (cur && cur !== iframeDoc.body) {
+        while (cur && cur !== iframeDoc.body && cur !== blockRoot) {
+          if (cur.classList && cur.classList.contains("lms-page-bg-overlay")) {
+            cur = cur.parentElement;
+            continue;
+          }
           const url = getElementBackgroundImageUrl(cur);
           if (url) return cur;
-          if (cur === blockRoot) break;
           cur = cur.parentElement;
         }
         return null;
@@ -5104,13 +5131,22 @@ ${buildRootCssString(state.tokens)}
         document.querySelectorAll("[data-token]").forEach(input => {
           const token = input.dataset.token;
           const val = state.tokens[token] || "#000000";
-          if (/^#[0-9a-f]{6}$/i.test(val)) input.value = val;
+          const hex = rgbToHex(val);
+          if (hex) input.value = hex;
         });
 
         document.querySelectorAll("[data-token-text]").forEach(input => {
           const token = input.dataset.tokenText;
           input.value = state.tokens[token] || "";
         });
+
+        const themeBgUrlInput = document.getElementById("theme-bg-img-url");
+        if (themeBgUrlInput && iframeDoc && iframeDoc.body) {
+          const lmsBg = iframeDoc.querySelector(".lms-page-bg");
+          const targetEl = lmsBg || iframeDoc.body;
+          const bgUrl = getElementBackgroundImageUrl(targetEl);
+          themeBgUrlInput.value = bgUrl.startsWith("data:") ? "(Imagem local carregada)" : bgUrl;
+        }
 
         const fontSel = document.getElementById("theme-font-select");
         if (state.tokens["--font"]) fontSel.value = state.tokens["--font"];
@@ -5162,6 +5198,67 @@ ${buildRootCssString(state.tokens)}
           inp.addEventListener("change", (e) => applyTokenChange(inp.dataset.tokenText, e.target.value.trim(), true));
         });
 
+        const applyGlobalPageBgImage = (imgUrl) => {
+          if (!iframeDoc || !iframeDoc.body) return;
+          const lmsBg = iframeDoc.querySelector(".lms-page-bg");
+          const targetEl = lmsBg || iframeDoc.body;
+          if (imgUrl) {
+            targetEl.style.backgroundImage = `url("${imgUrl}")`;
+            targetEl.style.backgroundSize = "cover";
+            targetEl.style.backgroundPosition = "center";
+            targetEl.style.backgroundRepeat = "no-repeat";
+            if (!lmsBg) targetEl.style.backgroundAttachment = "fixed";
+          } else {
+            targetEl.style.backgroundImage = "none";
+            if (!lmsBg) {
+              targetEl.style.backgroundAttachment = "";
+              targetEl.style.backgroundSize = "";
+              targetEl.style.backgroundPosition = "";
+              targetEl.style.backgroundRepeat = "";
+            }
+          }
+          state.bodyStyle = iframeDoc.body.getAttribute("style") || "";
+          syncThemeInputs();
+          pushHistory();
+        };
+
+        const themeBgFile = document.getElementById("theme-bg-img-file");
+        if (themeBgFile) {
+          themeBgFile.addEventListener("change", async (e) => {
+            const file = e.target.files[0];
+            if (!file || !file.type.startsWith("image/")) return;
+            try {
+              const res = await optimizeImageSource(file, { maxDim: 2560, quality: 0.94 });
+              applyGlobalPageBgImage(res.url);
+              showToast("Imagem de fundo da página atualizada!");
+            } catch {
+              const reader = new FileReader();
+              reader.onload = () => {
+                applyGlobalPageBgImage(reader.result);
+                showToast("Imagem de fundo da página atualizada!");
+              };
+              reader.readAsDataURL(file);
+            }
+          });
+        }
+
+        const themeBgUrl = document.getElementById("theme-bg-img-url");
+        if (themeBgUrl) {
+          themeBgUrl.addEventListener("change", (e) => {
+            const val = e.target.value.trim();
+            if (val.startsWith("(Imagem")) return;
+            applyGlobalPageBgImage(val);
+          });
+        }
+
+        const themeBgClear = document.getElementById("theme-bg-img-clear");
+        if (themeBgClear) {
+          themeBgClear.addEventListener("click", () => {
+            applyGlobalPageBgImage("");
+            showToast("Imagem de fundo da página removida");
+          });
+        }
+
         document.getElementById("theme-font-select").addEventListener("change", (e) => {
           applyTokenChange("--font", e.target.value, true);
         });
@@ -5181,8 +5278,7 @@ ${buildRootCssString(state.tokens)}
         });
         document.getElementById("theme-maxw-range").addEventListener("change", () => pushHistory());
       }
-
-      // =========================================================================
+	  // =========================================================================
       // 10. PAINEL DIREITO: INSPETOR DE PROPRIEDADES CONTEXTUAL
       // =========================================================================
       function renderInspectorEmpty() {
@@ -5192,11 +5288,48 @@ ${buildRootCssString(state.tokens)}
             <strong>Dicas rápidas de edição:</strong><br /><br />
             • <strong>Textos:</strong> Clique diretamente sobre qualquer título ou parágrafo para digitar em tempo real.<br />
             • <strong>Imagens:</strong> Clique em uma imagem para enviar/arrastar foto em alta resolução e ajustar automaticamente ao espaço.<br />
-            • <strong>Botões e Links:</strong> Clique para alterar texto, endereço e estilo.<br />
+            • <strong>Fundo das Seções:</strong> Clique em qualquer seção para trocar cor sólida, imagem de fundo ou sobreposição.<br />
             • <strong>Cards e Itens:</strong> Ao clicar em um item de lista/grade, use "Selecionar Card / Item Pai" para duplicar, mover ou remover.<br />
             • <strong>Seções:</strong> Arraste pelo ícone <strong>⋮⋮</strong> para reorganizar a página.
           </div>
         `;
+      }
+
+      function getBlockBackgroundTargets(block) {
+        let primary = block;
+        let primaryLabel = "Cor de Fundo da Seção";
+        let secondary = null;
+        let secondaryLabel = "";
+        let outer = null;
+        let outerLabel = "";
+
+        if (block.classList.contains("cta") && block.querySelector(".cta-card")) {
+          primary = block.querySelector(".cta-card");
+          primaryLabel = "Cor do Cartão CTA";
+          outer = block;
+          outerLabel = "Cor da Faixa Externa";
+        } else if (block.classList.contains("ua5-bottom") && block.querySelector(".ua5-cta")) {
+          primary = block.querySelector(".ua5-cta");
+          primaryLabel = "Cor do Cartão CTA";
+          outer = block;
+          outerLabel = "Cor da Faixa Externa";
+        } else if (block.classList.contains("mm-section") && block.querySelector(".mm-recruit-banner")) {
+          primary = block.querySelector(".mm-recruit-banner");
+          primaryLabel = "Cor do Banner";
+          outer = block;
+          outerLabel = "Cor da Faixa Externa";
+        } else if (block.classList.contains("mm-header-wrap") && block.querySelector(".mm-navbar")) {
+          primary = block.querySelector(".mm-navbar");
+          primaryLabel = "Cor da Barra do Menu";
+          secondary = block.querySelector(".mm-topbar");
+          secondaryLabel = "Cor da Barra Superior (Telefone)";
+        }
+
+        const heroBgImg = block.querySelector(":scope > img.mm-hero__bg, :scope > img.dental-hero-bg");
+        const scrimEl = block.querySelector(":scope > .mm-hero__scrim, :scope > .dental-hero-scrim, :scope > .lms-page-bg-overlay");
+        const backdropEl = block.querySelector(":scope > .ua7-hero__backdrop");
+
+        return { primary, primaryLabel, secondary, secondaryLabel, outer, outerLabel, heroBgImg, scrimEl, backdropEl };
       }
 
       function renderBlockInspector(block) {
@@ -5205,15 +5338,38 @@ ${buildRootCssString(state.tokens)}
 
         const hasBand = block.classList.contains("band");
         const isCta = block.classList.contains("cta");
+        const isLmsPageBg = block.classList.contains("lms-page-bg");
         const splitEl = block.querySelector(".split");
         const galleryEl = block.querySelector(".gallery");
-        const currentBg = block.style.backgroundColor || "";
+
+        const targets = getBlockBackgroundTargets(block);
+        const { primary, primaryLabel, secondary, secondaryLabel, outer, outerLabel, heroBgImg, scrimEl, backdropEl } = targets;
+
+        const compPrimary = iframeWin.getComputedStyle(primary);
+        const fallbackHex = rgbToHex(state.tokens["--bg"]) || "#ffffff";
+        const displayHex = rgbToHex(compPrimary.backgroundColor) || fallbackHex;
+
+        const heroImgVisible = !!(heroBgImg && heroBgImg.style.display !== "none");
+        const cssBgUrl = getElementBackgroundImageUrl(primary);
+        const activeImgUrl = heroImgVisible ? (heroBgImg.currentSrc || heroBgImg.getAttribute("src") || "") : cssBgUrl;
+        const hasActiveImage = !!activeImgUrl;
+
+        let overlayState = parseOverlayFromGradient(primary.style.backgroundImage) || { color: "#0f172a", opacity: 0 };
+        if (scrimEl) {
+          if (scrimEl.style.display === "none") {
+            overlayState = { color: "#0a0e14", opacity: 0 };
+          } else {
+            const parsedScrim = parseOverlayFromGradient(`linear-gradient(${scrimEl.style.backgroundColor || iframeWin.getComputedStyle(scrimEl).backgroundColor})`);
+            overlayState = parsedScrim || { color: "#0a0e14", opacity: 45 };
+          }
+        }
 
         const sectionImgs = Array.from(block.querySelectorAll("img"));
         const bgElements = [];
-        if (getElementBackgroundImageUrl(block)) bgElements.push(block);
         block.querySelectorAll("*").forEach(child => {
-          if (child.tagName !== "IMG" && getElementBackgroundImageUrl(child)) bgElements.push(child);
+          if (child.tagName !== "IMG" && !child.classList.contains("lms-page-bg-overlay") && getElementBackgroundImageUrl(child)) {
+            bgElements.push(child);
+          }
         });
 
         let mediaHtml = "";
@@ -5301,16 +5457,96 @@ ${buildRootCssString(state.tokens)}
           `;
         }
 
+        const secondaryColorHex = secondary ? (rgbToHex(iframeWin.getComputedStyle(secondary).backgroundColor) || "#5f6367") : "";
+        const outerColorHex = outer ? (rgbToHex(iframeWin.getComputedStyle(outer).backgroundColor) || fallbackHex) : "";
+        const backdropOpacity = backdropEl ? Math.round((parseFloat(backdropEl.style.opacity || "1")) * 100) : 100;
+
         inspectorBody.innerHTML = `
           ${mediaHtml}
           ${variantHtml}
+
+          <div class="panel-section-title">Plano de Fundo</div>
           <div class="field">
-            <label>Cor de Fundo da Seção</label>
-            <div class="color-row">
-              <input type="color" class="color-swatch" id="insp-sec-bg" value="${rgbToHex(currentBg) || "#ffffff"}" />
-              <button class="ui-btn" id="insp-sec-bg-reset" style="flex:1">Padrão original</button>
+            <div class="btn-group">
+              <button class="ui-btn ${!hasActiveImage ? "active" : ""}" id="insp-bg-mode-color">Cor Sólida</button>
+              <button class="ui-btn ${hasActiveImage ? "active" : ""}" id="insp-bg-mode-image">Imagem</button>
             </div>
           </div>
+
+          <div id="insp-bg-color-panel" style="display:${!hasActiveImage ? "block" : "none"};">
+            <div class="field">
+              <label>${primaryLabel}</label>
+              <div class="color-row">
+                <input type="color" class="color-swatch" id="insp-sec-bg" value="${displayHex}" />
+                <input type="text" class="input" id="insp-sec-bg-hex" value="${displayHex}" style="max-width:96px;" />
+                <button class="ui-btn" id="insp-sec-bg-reset" style="flex:1">Padrão</button>
+              </div>
+            </div>
+            ${backdropEl ? `
+              <div class="field">
+                <label>Brilho / Efeitos do Fundo</label>
+                <div class="range-row">
+                  <input type="range" id="insp-backdrop-opacity" min="0" max="100" step="5" value="${backdropOpacity}" />
+                  <span class="range-val" id="insp-backdrop-val">${backdropOpacity}%</span>
+                </div>
+              </div>
+            ` : ""}
+          </div>
+
+          <div id="insp-bg-image-panel" style="display:${hasActiveImage ? "block" : "none"};">
+            ${hasActiveImage ? `
+              <div class="img-preview-box">
+                <img id="insp-sec-bg-preview" src="${escapeAttr(activeImgUrl)}" alt="Fundo atual" />
+              </div>
+            ` : ""}
+            <div class="field">
+              <label>Enviar ou Arrastar Imagem de Fundo</label>
+              <label class="img-dropzone" id="insp-sec-bg-dropzone">
+                <strong>Clique ou arraste uma foto</strong>
+                <span>Ajuste automático em alta resolução</span>
+                <input id="insp-sec-bg-file" type="file" accept="image/*" style="display:none;" />
+              </label>
+            </div>
+            <div class="field">
+              <label>Ou URL da Imagem de Fundo</label>
+              <input class="input" id="insp-sec-bg-url" type="text" value="${activeImgUrl.startsWith("data:") ? "(Imagem local)" : escapeAttr(activeImgUrl)}" placeholder="https://exemplo.com/fundo.jpg" />
+            </div>
+            <div class="field">
+              <label>Sobreposição / Escurecimento</label>
+              <div class="color-row" style="margin-bottom:6px;">
+                <input type="color" class="color-swatch" id="insp-sec-overlay-color" value="${overlayState.color}" />
+                <div class="range-row" style="flex:1;">
+                  <input type="range" id="insp-sec-overlay-opacity" min="0" max="95" step="5" value="${overlayState.opacity}" />
+                  <span class="range-val" id="insp-sec-overlay-val">${overlayState.opacity}%</span>
+                </div>
+              </div>
+            </div>
+            <div class="btn-group" style="margin-bottom:12px;">
+              <button class="ui-btn danger" id="insp-sec-bg-remove-img">Usar Só Cor</button>
+              <button class="ui-btn" id="insp-sec-bg-reset-img">Padrão</button>
+            </div>
+          </div>
+
+          ${secondary ? `
+            <div class="field">
+              <label>${secondaryLabel}</label>
+              <div class="color-row">
+                <input type="color" class="color-swatch" id="insp-sec-bg-secondary" value="${secondaryColorHex}" />
+                <input type="text" class="input" id="insp-sec-bg-secondary-hex" value="${secondaryColorHex}" style="flex:1;" />
+              </div>
+            </div>
+          ` : ""}
+
+          ${outer ? `
+            <div class="field">
+              <label>${outerLabel}</label>
+              <div class="color-row">
+                <input type="color" class="color-swatch" id="insp-sec-bg-outer" value="${outerColorHex}" />
+                <input type="text" class="input" id="insp-sec-bg-outer-hex" value="${outerColorHex}" style="flex:1;" />
+              </div>
+            </div>
+          ` : ""}
+
           <div class="field">
             <button class="ui-btn" id="insp-edit-html" style="width:100%">
               &lt;/&gt; Editar HTML da Seção
@@ -5361,17 +5597,218 @@ ${buildRootCssString(state.tokens)}
         bind("insp-cta-dark", () => { block.classList.remove("cta-soft"); block.classList.add("cta-dark"); pushHistory(); renderBlockInspector(block); });
         bind("insp-cta-soft", () => { block.classList.remove("cta-dark"); block.classList.add("cta-soft"); pushHistory(); renderBlockInspector(block); });
 
-        document.getElementById("insp-sec-bg").addEventListener("input", (e) => {
-          block.style.background = e.target.value;
-          block.style.backgroundColor = e.target.value;
-        });
-        document.getElementById("insp-sec-bg").addEventListener("change", () => pushHistory());
-        bind("insp-sec-bg-reset", () => {
-          block.style.background = "";
-          block.style.backgroundColor = "";
+        const switchToSolidColor = (hexColor) => {
+          if (heroBgImg) heroBgImg.style.display = "none";
+          if (scrimEl) scrimEl.style.display = "none";
+          primary.style.background = "";
+          primary.style.backgroundImage = "none";
+          primary.style.backgroundColor = hexColor;
+        };
+
+        const applyBgImageWithOverlay = (imgUrl, ovHex, ovOpacity) => {
+          if (heroBgImg) {
+            heroBgImg.style.display = "";
+            if (imgUrl && imgUrl !== (heroBgImg.currentSrc || heroBgImg.getAttribute("src"))) {
+              applyImageSource(heroBgImg, imgUrl, { autoFit: true });
+            }
+            if (scrimEl) {
+              scrimEl.style.display = ovOpacity > 0 ? "" : "none";
+              scrimEl.style.background = ovOpacity > 0 ? hexToRgba(ovHex, ovOpacity / 100) : "none";
+            }
+          } else if (imgUrl) {
+            if (scrimEl) {
+              primary.style.backgroundImage = `url("${imgUrl}")`;
+              scrimEl.style.display = ovOpacity > 0 ? "" : "none";
+              scrimEl.style.background = ovOpacity > 0 ? hexToRgba(ovHex, ovOpacity / 100) : "none";
+            } else {
+              const grad = ovOpacity > 0
+                ? `linear-gradient(${hexToRgba(ovHex, ovOpacity / 100)}, ${hexToRgba(ovHex, ovOpacity / 100)}), `
+                : "";
+              primary.style.backgroundImage = `${grad}url("${imgUrl}")`;
+            }
+            primary.style.backgroundSize = "cover";
+            primary.style.backgroundPosition = "center";
+            primary.style.backgroundRepeat = "no-repeat";
+          }
+        };
+
+        const resetSectionBg = () => {
+          [primary, secondary, outer].forEach(t => {
+            if (!t) return;
+            t.style.background = "";
+            t.style.backgroundColor = "";
+            t.style.backgroundImage = "";
+            t.style.backgroundSize = "";
+            t.style.backgroundPosition = "";
+            t.style.backgroundRepeat = "";
+          });
+          if (isLmsPageBg) {
+            primary.style.backgroundImage = `url('${LMS_DEFAULT_BG_URL}')`;
+          }
+          if (heroBgImg) heroBgImg.style.display = "";
+          if (scrimEl) {
+            scrimEl.style.display = "";
+            scrimEl.style.background = "";
+          }
+          if (backdropEl) backdropEl.style.opacity = "";
+          pushHistory();
+          renderBlockInspector(block);
+        };
+
+        const secColorInput = document.getElementById("insp-sec-bg");
+        const secHexInput = document.getElementById("insp-sec-bg-hex");
+
+        bind("insp-bg-mode-color", () => {
+          switchToSolidColor(secColorInput.value);
           pushHistory();
           renderBlockInspector(block);
         });
+
+        bind("insp-bg-mode-image", () => {
+          if (heroBgImg) heroBgImg.style.display = "";
+          if (scrimEl) scrimEl.style.display = "";
+          document.getElementById("insp-bg-mode-color").classList.remove("active");
+          document.getElementById("insp-bg-mode-image").classList.add("active");
+          document.getElementById("insp-bg-color-panel").style.display = "none";
+          document.getElementById("insp-bg-image-panel").style.display = "block";
+        });
+
+        secColorInput.addEventListener("input", (e) => {
+          switchToSolidColor(e.target.value);
+          secHexInput.value = e.target.value;
+          scheduleHistoryPush();
+        });
+        secColorInput.addEventListener("change", () => {
+          clearTimeout(historyTimer);
+          pushHistory();
+        });
+        secHexInput.addEventListener("change", (e) => {
+          const hex = rgbToHex(e.target.value.trim());
+          if (!hex) return;
+          secColorInput.value = hex;
+          switchToSolidColor(hex);
+          pushHistory();
+        });
+
+        if (backdropEl) {
+          const bdRange = document.getElementById("insp-backdrop-opacity");
+          const bdVal = document.getElementById("insp-backdrop-val");
+          bdRange.addEventListener("input", (e) => {
+            backdropEl.style.opacity = String(parseInt(e.target.value, 10) / 100);
+            bdVal.textContent = e.target.value + "%";
+            scheduleHistoryPush();
+          });
+          bdRange.addEventListener("change", () => { clearTimeout(historyTimer); pushHistory(); });
+        }
+
+        const ovColorEl = document.getElementById("insp-sec-overlay-color");
+        const ovOpEl = document.getElementById("insp-sec-overlay-opacity");
+        const ovValEl = document.getElementById("insp-sec-overlay-val");
+        let currentPanelImgUrl = activeImgUrl;
+
+        const updateOverlayOnly = () => {
+          const op = parseInt(ovOpEl.value, 10) || 0;
+          ovValEl.textContent = op + "%";
+          applyBgImageWithOverlay(currentPanelImgUrl, ovColorEl.value, op);
+          scheduleHistoryPush();
+        };
+        ovColorEl.addEventListener("input", updateOverlayOnly);
+        ovColorEl.addEventListener("change", () => { clearTimeout(historyTimer); pushHistory(); });
+        ovOpEl.addEventListener("input", updateOverlayOnly);
+        ovOpEl.addEventListener("change", () => { clearTimeout(historyTimer); pushHistory(); });
+
+        const handleSectionBgFile = async (file) => {
+          if (!file || !file.type.startsWith("image/")) {
+            showToast("Selecione um arquivo de imagem válido.");
+            return;
+          }
+          try {
+            const res = await optimizeImageSource(file, { maxDim: 2560, quality: 0.94 });
+            currentPanelImgUrl = res.url;
+            applyBgImageWithOverlay(res.url, ovColorEl.value, parseInt(ovOpEl.value, 10) || 0);
+            pushHistory();
+            renderBlockInspector(block);
+            showToast("Imagem de fundo da seção atualizada!");
+          } catch {
+            const reader = new FileReader();
+            reader.onload = () => {
+              currentPanelImgUrl = reader.result;
+              applyBgImageWithOverlay(reader.result, ovColorEl.value, parseInt(ovOpEl.value, 10) || 0);
+              pushHistory();
+              renderBlockInspector(block);
+            };
+            reader.readAsDataURL(file);
+          }
+        };
+
+        document.getElementById("insp-sec-bg-file").addEventListener("change", (e) => {
+          if (e.target.files[0]) handleSectionBgFile(e.target.files[0]);
+        });
+        const secDrop = document.getElementById("insp-sec-bg-dropzone");
+        secDrop.addEventListener("dragover", (e) => { e.preventDefault(); secDrop.classList.add("dragover"); });
+        secDrop.addEventListener("dragleave", () => secDrop.classList.remove("dragover"));
+        secDrop.addEventListener("drop", (e) => {
+          e.preventDefault();
+          secDrop.classList.remove("dragover");
+          if (e.dataTransfer.files[0]) handleSectionBgFile(e.dataTransfer.files[0]);
+        });
+
+        document.getElementById("insp-sec-bg-url").addEventListener("change", (e) => {
+          const val = e.target.value.trim();
+          if (!val || val.startsWith("(Imagem")) return;
+          currentPanelImgUrl = val;
+          applyBgImageWithOverlay(val, ovColorEl.value, parseInt(ovOpEl.value, 10) || 0);
+          pushHistory();
+          renderBlockInspector(block);
+        });
+
+        bind("insp-sec-bg-remove-img", () => {
+          switchToSolidColor(displayHex);
+          pushHistory();
+          renderBlockInspector(block);
+        });
+        bind("insp-sec-bg-reset", resetSectionBg);
+        bind("insp-sec-bg-reset-img", resetSectionBg);
+
+        if (secondary) {
+          const sec2 = document.getElementById("insp-sec-bg-secondary");
+          const sec2Hex = document.getElementById("insp-sec-bg-secondary-hex");
+          sec2.addEventListener("input", (e) => {
+            secondary.style.backgroundImage = "none";
+            secondary.style.backgroundColor = e.target.value;
+            sec2Hex.value = e.target.value;
+            scheduleHistoryPush();
+          });
+          sec2.addEventListener("change", () => { clearTimeout(historyTimer); pushHistory(); });
+          sec2Hex.addEventListener("change", (e) => {
+            const hex = rgbToHex(e.target.value.trim());
+            if (!hex) return;
+            sec2.value = hex;
+            secondary.style.backgroundImage = "none";
+            secondary.style.backgroundColor = hex;
+            pushHistory();
+          });
+        }
+
+        if (outer) {
+          const outCol = document.getElementById("insp-sec-bg-outer");
+          const outHex = document.getElementById("insp-sec-bg-outer-hex");
+          outCol.addEventListener("input", (e) => {
+            outer.style.backgroundImage = "none";
+            outer.style.backgroundColor = e.target.value;
+            outHex.value = e.target.value;
+            scheduleHistoryPush();
+          });
+          outCol.addEventListener("change", () => { clearTimeout(historyTimer); pushHistory(); });
+          outHex.addEventListener("change", (e) => {
+            const hex = rgbToHex(e.target.value.trim());
+            if (!hex) return;
+            outCol.value = hex;
+            outer.style.backgroundImage = "none";
+            outer.style.backgroundColor = hex;
+            pushHistory();
+          });
+        }
 
         bind("insp-edit-html", () => openSectionHtmlEditor(block));
         bind("insp-move-up", () => moveSelectedBlock(-1));
@@ -5383,7 +5820,7 @@ ${buildRootCssString(state.tokens)}
       function renderItemInspector(item, parentBlock) {
         inspectorTitle.textContent = "Editar Card / Item";
         const computed = iframeWin.getComputedStyle(item);
-        const currentBg = item.style.backgroundColor || computed.backgroundColor || "#0f172a";
+        const currentBg = rgbToHex(item.style.backgroundColor) || rgbToHex(computed.backgroundColor) || "#0f172a";
 
         inspectorBody.innerHTML = `
           <div class="hint-box" style="margin-bottom:12px;">
@@ -5399,7 +5836,7 @@ ${buildRootCssString(state.tokens)}
           <div class="field">
             <label>Cor de Fundo do Card / Item</label>
             <div class="color-row">
-              <input type="color" class="color-swatch" id="insp-item-bg" value="${rgbToHex(currentBg) || "#0f172a"}" />
+              <input type="color" class="color-swatch" id="insp-item-bg" value="${currentBg}" />
               <button class="ui-btn" id="insp-item-bg-reset" style="flex:1">Padrão</button>
             </div>
           </div>
@@ -5424,13 +5861,26 @@ ${buildRootCssString(state.tokens)}
           }
         });
         document.getElementById("insp-item-bg").addEventListener("input", (e) => {
-          item.style.background = e.target.value;
+          item.style.backgroundImage = "none";
           item.style.backgroundColor = e.target.value;
+          const caseImg = item.querySelector(":scope > img.ua-case__bg");
+          const caseOverlay = item.querySelector(":scope > .ua5-case__overlay");
+          if (caseImg) caseImg.style.display = "none";
+          if (caseOverlay) caseOverlay.style.display = "none";
+          scheduleHistoryPush();
         });
-        document.getElementById("insp-item-bg").addEventListener("change", () => pushHistory());
+        document.getElementById("insp-item-bg").addEventListener("change", () => {
+          clearTimeout(historyTimer);
+          pushHistory();
+        });
         document.getElementById("insp-item-bg-reset").addEventListener("click", () => {
           item.style.background = "";
           item.style.backgroundColor = "";
+          item.style.backgroundImage = "";
+          const caseImg = item.querySelector(":scope > img.ua-case__bg");
+          const caseOverlay = item.querySelector(":scope > .ua5-case__overlay");
+          if (caseImg) caseImg.style.display = "";
+          if (caseOverlay) caseOverlay.style.display = "";
           pushHistory();
           renderItemInspector(item, parentBlock);
         });
@@ -5515,6 +5965,7 @@ ${buildRootCssString(state.tokens)}
           const isDataSvg = currentSrc.startsWith("data:image/svg");
           const isDataBase64 = currentSrc.startsWith("data:image/") && !isDataSvg;
           const isLogo = isLogoElement(el);
+          const isHeroOrCaseBg = el.matches && el.matches(".mm-hero__bg, .dental-hero-bg, .ua-case__bg");
 
           const computed = iframeWin.getComputedStyle(el);
           const natW = !isBgImage ? (el.naturalWidth || 0) : 0;
@@ -5541,6 +5992,12 @@ ${buildRootCssString(state.tokens)}
               <span>Resolução: <strong>${metaDim}</strong></span>
               <span>Peso: <strong>${metaSize}</strong></span>
             </div>
+
+            ${isHeroOrCaseBg && parentBlock ? `
+              <button class="ui-btn" id="insp-switch-sec-bg" style="width:100%;margin-bottom:10px;">
+                🎨 Mudar Cor / Sobreposição do Fundo
+              </button>
+            ` : ""}
 
             <div class="field">
               <label>Enviar ou Arrastar Imagem (Alta Resolução)</label>
@@ -5646,6 +6103,15 @@ ${buildRootCssString(state.tokens)}
             ${!isBgImage ? `<button class="ui-btn danger" id="insp-del-el" style="width:100%;margin-bottom:8px;">✕ Remover Imagem</button>` : `<button class="ui-btn danger" id="insp-clear-bg" style="width:100%;margin-bottom:8px;">✕ Remover Imagem de Fundo</button>`}
             <button class="ui-btn" id="insp-back-section" style="width:100%">← Propriedades da Seção</button>
           `;
+
+          const switchBgBtn = document.getElementById("insp-switch-sec-bg");
+          if (switchBgBtn && parentBlock) {
+            switchBgBtn.addEventListener("click", () => {
+              clearInnerElementSelection();
+              renderBlockInspector(parentBlock);
+              updateMobilePropIndicator();
+            });
+          }
 
           const getOptSettings = () => {
             const rawMax = parseInt(document.getElementById("insp-opt-maxdim").value, 10);
@@ -6034,6 +6500,10 @@ ${buildRootCssString(state.tokens)}
         const delElBtn = document.getElementById("insp-del-el");
         if (delElBtn) {
           delElBtn.addEventListener("click", () => {
+            if (el.classList && (el.classList.contains("mm-hero__bg") || el.classList.contains("dental-hero-bg"))) {
+              const scrim = parentBlock && parentBlock.querySelector(":scope > .mm-hero__scrim, :scope > .dental-hero-scrim");
+              if (scrim) scrim.style.display = "none";
+            }
             el.remove();
             clearInnerElementSelection();
             if (parentBlock && parentBlock.isConnected) {
@@ -6345,7 +6815,7 @@ ${buildRootCssString(state.tokens)}
             setCloneStatus("Acesso direto bloqueado por CORS. Tentando leitor auxiliar...", "info");
             const proxyUrl = "https://api.allorigins.win/raw?url=" + encodeURIComponent(url);
             const proxyRes = await fetch(proxyUrl);
-           if (!proxyRes.ok) throw new Error("Falha no leitor auxiliar (" + proxyRes.status + ")");
+            if (!proxyRes.ok) throw new Error("Falha no leitor auxiliar (" + proxyRes.status + ")");
             htmlText = await proxyRes.text();
           }
 
@@ -6515,9 +6985,13 @@ ${buildRootCssString(state.tokens)}
           : "";
 
         const bodyClassAttr = state.bodyClass ? ` class="${escapeAttr(state.bodyClass)}"` : "";
+        const defaultBodyStyle = "margin:0;background-color:var(--bg,#ffffff)";
+        const exportedBodyStyle = iframeDoc && iframeDoc.body
+          ? (iframeDoc.body.getAttribute("style") || state.bodyStyle)
+          : state.bodyStyle;
         const bodyStyleAttr = state.isClonedCustom
-          ? (state.bodyStyle ? ` style="${escapeAttr(state.bodyStyle)}"` : "")
-          : ` style="margin:0;background:var(--bg,#ffffff)"`;
+          ? (exportedBodyStyle ? ` style="${escapeAttr(exportedBodyStyle)}"` : "")
+          : ` style="${escapeAttr(exportedBodyStyle || defaultBodyStyle)}"`;
 
         const runtimeScript = `\n    <script data-editor-runtime>\n${buildExportRuntimeScript(false)}\n    <\/script>`;
 
@@ -6588,10 +7062,40 @@ ${bodyClone.innerHTML.trim()}${runtimeScript}
 
       function rgbToHex(color) {
         if (!color) return "";
-        if (color.startsWith("#")) return color.length === 7 ? color : "";
-        const m = color.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)/i);
+        const c = color.trim();
+        if (c === "transparent") return "";
+        if (c.startsWith("#")) {
+          if (c.length === 7) return c;
+          if (c.length === 4) return "#" + c[1] + c[1] + c[2] + c[2] + c[3] + c[3];
+          return "";
+        }
+        const m = c.match(/^rgba?\(\s*(\d+)[\s,]+(\d+)[\s,]+(\d+)(?:[\s,/]+([\d.]+%?))?/i);
         if (!m) return "";
+        if (m[4] !== undefined) {
+          const alpha = m[4].endsWith("%") ? parseFloat(m[4]) / 100 : parseFloat(m[4]);
+          if (alpha === 0) return "";
+        }
         return "#" + [m[1], m[2], m[3]].map(x => parseInt(x, 10).toString(16).padStart(2, "0")).join("");
+      }
+
+      function hexToRgba(hex, alpha) {
+        const clean = (hex || "#0f172a").replace("#", "");
+        const full = clean.length === 3
+          ? clean[0] + clean[0] + clean[1] + clean[1] + clean[2] + clean[2]
+          : clean.padEnd(6, "0").slice(0, 6);
+        const r = parseInt(full.slice(0, 2), 16) || 0;
+        const g = parseInt(full.slice(2, 4), 16) || 0;
+        const b = parseInt(full.slice(4, 6), 16) || 0;
+        return `rgba(${r},${g},${b},${alpha})`;
+      }
+
+      function parseOverlayFromGradient(bgImgStr) {
+        if (!bgImgStr) return null;
+        const m = bgImgStr.match(/linear-gradient\(\s*rgba?\(\s*(\d+)[\s,]+(\d+)[\s,]+(\d+)(?:[\s,/]+([\d.]+))?\s*\)/i);
+        if (!m) return null;
+        const hex = "#" + [m[1], m[2], m[3]].map(x => parseInt(x, 10).toString(16).padStart(2, "0")).join("");
+        const alpha = m[4] !== undefined ? parseFloat(m[4]) : 1;
+        return { color: hex, opacity: Math.round(alpha * 100) };
       }
 
       function init() {
